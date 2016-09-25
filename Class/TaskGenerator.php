@@ -1,5 +1,4 @@
 <?
-include_once 'Task_interface.php';
 
 /**
  * 
@@ -7,12 +6,12 @@ include_once 'Task_interface.php';
 class TaskGenerator {
 public static $BigNum = 999;
 
-	  public static function GenCustomTask()
+	  public function genCustomTask()
 	 {
 			return new CustomTask();
 	 }
 	 
-	 public static function GenFullTask($TV,$amountV)
+	 public function genFullTask($TV,$amountV)
 	 {
 			return new FullTask($TV,$amountV);
 	 }

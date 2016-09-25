@@ -1,5 +1,4 @@
 <?
-include_once "Solver.php";
 /**
  * 
  */
