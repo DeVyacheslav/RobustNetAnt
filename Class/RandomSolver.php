@@ -1,24 +1,31 @@
-<?
-
-function RandomSolver()
-{
-	if($_GET['method']=='ant')
-	{
-		AntRand();
-	}elseif($_GET['method']=='d'){
-		Dijkstra(1);
-	}
-}
-
-function AntRand()
-{
+<?php
+/**
+ * 
+ */
+class RandomSolver extends ASolver {
 	
-	if(isset($_GET['Terminal']) && isset($_GET['amountV']))
-	{
-		AntAlgorithm(1);
+	public function run(TaskGenerator $generator){	
+		$task = $generator->genFullTask($_POST['Terminal'],$_POST['amountV']);
+		if($_POST['method']=='ant')
+		{
+			$this->antRand($generator);
+		}elseif($_POST['method']=='d'){
+			$this->dijkstra($task);
+		}
 	}
-	else 
+	
+	
+	public function antRand(TaskGenerator $generator)
 	{
-		AntAlgorithm(2);
+		if(isset($_POST['Terminal']) && isset($_POST['amountV']))
+		{
+			$task = $generator->genFullTask($_POST['Terminal'],$_POST['amountV']);
+			$this->AntAlgorithm($task);
+		}
+		else 
+		{
+			$task = $generator->genFullTask(2,4);
+			$this->AntAlgorithm($task);
+		}
 	}
 }

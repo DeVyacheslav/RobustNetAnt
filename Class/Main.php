@@ -1,40 +1,35 @@
 <?php
-include_once "Class/TaskGenerator.php";
-include_once "Class/Solver.php";
-include_once "Class/Solver_D.php";	
-include_once "Class/Visualization.php";
-include_once 'Class/ViewSolver.php';
-include_once 'Class/Solver_Controller.php';
-include_once 'Class/DataCheck.php';
-include_once 'Class/CustomSolver.php';
-include_once 'Class/RandomSolver.php';
-include_once 'Class/AbstractSolver.php';
-	
-//try{
-		
-	inputValidation();
+require_once "Class/Autoloader.php";
 
-	if($_GET['customtask']=='ct')
+	autoloadFiles();
+	
+	inputValidation(new DataCheck);
+
+	if($_POST['customtask']=='ct')
 	{	
 		$obj = new CustomSolver;
-		$obj->Run();
-	}elseif($_GET['customtask']=='ft'){
+		runSolver($obj);
+	}elseif($_POST['customtask']=='ft'){
 		$obj = new RandomSolver;
-		$obj->Run();
+		runSolver($obj);
 	}
-/*}catch(Exception $e){
-		echo 'Caught exception: ',  $e->getMessage(), "\n";
-}*/
 
-
-function inputValidation()
+function runSolver(ASolver $solver)
 {
-	DataCheck::checkField($_GET['amountV'], 3, 1000);	
-	DataCheck::checkField($_GET['Terminal'], 2, $_GET['amountV']);			
-	DataCheck::checkField($_GET['alpha'], 0, 10);
-	DataCheck::checkField($_GET['beta'], 0, 10);
-	DataCheck::checkField($_GET['decay'], 0, 10);
-	DataCheck::checkField($_GET['run'], 0, 100);
+	$generator = new TaskGenerator;
+	$solver->run($generator);
+}
+
+function inputValidation(ICheck $checker)
+{
+	//$checker = new DataCheck();
+	$checker->checkField($_POST['amountV'], 3, 1000);	
+	$checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);			
+	$checker->checkField($_POST['alpha'], 0, 10);
+	$checker->checkField($_POST['beta'], 0, 10);
+	$checker->checkField($_POST['decay'], 0, 10);
+	$checker->checkField($_POST['run'], 0, 100);
+	$checker->checkField($_POST['numCol'], 10, 10000);
 }
 
 ?>
