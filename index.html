@@ -1,221 +1,142 @@
-<<<<<<< HEAD
-
-
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-.node  {
-  stroke: #fff;
-  stroke-width: 5px;
-}
-/*.node text{
-  pointer-events: none;
-  font: 10px sans-serif;
-}*/
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
-}
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-
-</style>
-
-<body>
-		<fieldset>
-				<legend id="type">Select method:</legend>
-				
-				<input type="radio" name="method" value="ant" onchange="updateTotalM(this)"> Ant algorithm<Br>
-				
-		   	<input type="radio" name="method" value="d" onchange="updateTotalM(this)"> Dijkstra algorithm<Br>
-	 	</fieldset>	
-	 		
- 		<fieldset id="task_ant" style="display: none">
- 			
- 				
-			<legend id="type">Select task type:</legend>
-			<input type="radio" name="load" value="yes" onchange="updateTotal(this)"> Load from file<Br>
+<html>
+	<head>
+		<title>Robust network design problem</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/jquery.js"></script>
+		
+	</head>
+	
+	<body>
+		<div class="container">
 			
-	   	<input type="radio" name="load" value="no"	onchange="updateTotal(this)"> Create random full task<Br>
- 		</fieldset>	
- 		
- 		<fieldset id="task_d" style="display: none">
-			<legend id="type">Select task type:</legend>
-			<input type="radio" name="load" value="yes" onchange="updateTotalD(this)"> Load from file<Br>
+			<div class="panel panel-default">
+				<button id="task-info-btn" type="button" class="btn btn-primary btn-block">Task info <span class="caret"></span></button>
+
+				<div id="task-info" class="panel panel-body">
+					Task info <br>
+					Task info <br>
+					Task info <br>
+					Task info <br>
+					Task info <br>
+				</div>
+			</div>
 			
-	   	<input type="radio" name="load" value="no"	onchange="updateTotalD(this)"> Create random full task<Br>
- 		</fieldset>	
-   	
-   	<fieldset id="loadfile" style="display: none">
-   		<form method="get">
-   				<input type="hidden" name="method" value="ant">
- 			<input type="hidden" name="customtask" value="ct"> <Br>
- 			<legend id="tipcolor">Input data</legend>
-			Enter alpha:
-			<input name="alpha" title="Enter alpha:" min="0.1" value="0.3"></input><Br>	
-			Enter beta:
-			<input name="beta" title="Enter beta:" min="0.1" value="0.3"></input><Br>	
-			Enter decay rate:
-			<input name="decay" title="Enter decay rate:" min="0.5" value="0.9"></input><Br>
-			Number of runnings:
-			<input name="run" title="Runnings number:" min="1" value="5"></input><Br>	
-			Number of colonies:
-			<input name="numCol" title="Runnings number:" min="10" value="500"></input><Br>	
- 			<select name="task">
-				  <option value=1>Task 1 [4,8]</option>
-				  <option value=2>Task 2 [5,17]</option>
-				  <option value=3>Task 3 [8,38]</option>
-				  <option value=4>Task 4 [10,10]</option>
-				  <option value=5>Task 5 [10,15]</option>
-				  <option value=6>Task 6 [15,15]</option>
-				  <option value=7>Task 7 [10,20]</option>
-				  <option value=8>Task 8 [10,30]</option>
-				  <option value=9>Task 9 [10,40]</option>
-				  <option value=10>Task 10 [10,50]</option>
-			</select><Br>
-			<input type='submit'  value="Submit">
-			</form>
- 		</fieldset>	
- 		
- 		<fieldset id="loadfile_d" style="display: none">
-   		<form method="get">
- 			<input type="hidden" name="customtask" value="ct"> <Br>
- 				
- 			<input type="hidden" name="method" value="d">
- 			<select name="task">
-				  <option value=1>Task 1 [4,8]</option>
-				  <option value=2>Task 2 [5,17]</option>
-				  <option value=3>Task 3 [8,38]</option>
-				  <option value=4>Task 4 [10,10]</option>
-				  <option value=5>Task 5 [10,15]</option>
-				  <option value=6>Task 6 [15,15]</option>
-				  <option value=7>Task 7 [10,20]</option>
-				  <option value=8>Task 8 [10,30]</option>
-				  <option value=9>Task 9 [10,40]</option>
-				  <option value=10>Task 10 [10,50]</option>
-			</select><Br>
-			<input type='submit'  value="Submit">
-			</form>
-			
- 		</fieldset>	
- 		
-		<fieldset id="random" style="display: none">
-			<form method="get">
- 				
- 			<input type="hidden" name="method" value="ant">	
-      <legend id="tipcolor">Input data</legend>
-			Enter amount of terminal vertexes:
-			<input name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5"></input> <br>
-			Enter overall amount of vertexes:
-			<input name="amountV" title="Enter overall amount of vertexes:" min="3" value="17"></input><Br>
-			Enter alpha:
-			<input name="alpha" title="Enter alpha:" min="0.1" value="1.1"></input><Br>	
-			Enter beta:
-			<input name="beta" title="Enter beta:" min="0.1" value="3"></input><Br>	
-			Enter decay rate:
-			<input name="decay" title="Enter decay rate:" min="0.5" value="0.9"></input><Br>		
-			Number of runnings:
-			<input name="run" title="Runnings number:" min="1" value="5"></input><Br>	
-			Number of colonies:
-			<input name="numCol" title="Runnings number:" min="10" value="500"></input><Br>	
-	   	<input type="hidden" name="customtask" value="ft"> <Br>
-   		<input type='submit'  value="Submit">
-   		</form>
- 		</fieldset>
- 		
- 		<fieldset id="random_d" style="display: none">
-			<form method="get">
- 				
- 			<input type="hidden" name="method" value="d">
-        <legend id="tipcolor">Input data</legend>
-			Enter amount of terminal vertexes:
-			<input name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5"></input> <br>
-			Enter overall amount of vertexes:
-			<input name="amountV" title="Enter overall amount of vertexes:" min="3" value="17"></input><Br>
-	   	<input type="hidden" name="customtask" value="ft"> <Br>
-   		<input type='submit'  value="Submit">
-   		</form>
- 		</fieldset>
-	<script>
-	function hideOthers(selectedValue) {
-		    var loadfile = document.getElementById('loadfile'),
-		        random = document.getElementById('random'),
-		        random_d = document.getElementById('random_d');
-		      
-		    if(selectedValue === 'yes') {
-		        random.style.display = 'none';
-		        random_d.style.display = 'none';
-		        loadfile.style.display = 'block';
-		    } else if(selectedValue === 'no') {
-	        	random.style.display = 'block';
-	        	random_d.style.display = 'none';
-		        loadfile.style.display = 'none';
-		    }
-		    
-		}
-		function hideOthersM(selectedValue) {
-		    var method = document.getElementById('method'),
-		   			loadfile = document.getElementById('loadfile'),
-		   			loadfile_d = document.getElementById('loadfile_d'),
-		   			random = document.getElementById('random'),
-		   			random_d = document.getElementById('random_d');
-		   			task_ant = document.getElementById('task_ant'),
-		        task_d = document.getElementById('task_d');
-		    
-		    random.style.display = 'none';   
-		    loadfile.style.display = 'none';  
-		    loadfile_d.style.display = 'none'; 
-		    random_d.style.display = 'none';
-		    
-		    if(selectedValue === 'ant') {
-		        task_ant.style.display = 'block';
-		        task_d.style.display = 'none';
-		    } else if(selectedValue === 'd') {
-		        task_d.style.display = 'block';
-		       	task_ant.style.display = 'none';
-		    }
-		}
-		function hideOthersD(selectedValue) {
-		    var loadfile = document.getElementById('loadfile'),
-		        loadfile_d = document.getElementById('loadfile_d'),
-		        random = document.getElementById('random'),
-		        random_d = document.getElementById('random_d');
-		     
-		     random.style.display = 'none';
-		     loadfile.style.display = 'none';
-		    
-		    if(selectedValue === 'yes') {
-		        random_d.style.display = 'none';
-		        loadfile_d.style.display = 'block';
-		    } else if(selectedValue === 'no') {
-	        	random_d.style.display = 'block';
-		        loadfile_d.style.display = 'none';
-		    }
-		}
-		function updateTotal(input) {
-		   hideOthers(input.value);
-		}
-		function updateTotalM(input) {
-		   hideOthersM(input.value);
-		}
-		function updateTotalD(input) {
-		   hideOthersD(input.value);
-		}
-		</script>	
+			<div class="panel panel-default">
+				<button id="solver-info-btn" type="button" class="btn btn-primary btn-block">Solver <span class="caret"></span></button>
+				<div id="solver-info" class="panel panel-body">
+					
+					<div class="col-md-6">
+							<button id="task-file" class="btn btn-warning btn-block">Task from file</button>
+					</div>
+					<div class="col-md-6">
+							<button id="task-random" class="btn btn-warning btn-block">Random generated task</button>
 
+					</div>
+					
+					<div class="col-md-6 task-solver">
+						
+						<div class="panel panel-heading">Ant algorithm</div>
+						<div class="panel panel-body task-solver">
+							<form method="post">
+				   				<input type="hidden" name="method" value="ant">
+				   				<input type="hidden" name="customtask" value="ct">
+					 			 
+					 			<legend id="tipcolor">Input data</legend>
+								<div class="form-group">
+									<div class="task-random-solver">
+										<label for="Terminal">	Enter amount of terminal vertexes:</label>
+										 
+										<input class="form-control" id="Terminal" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5">
 
-
-
-<?php 
-	include_once "Class/Main.php";
-?>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src='js/Visualization.js'></script>
+										
+										<label for="amountV">	Enter overall amount of vertexes:</label>
+										<input class="form-control" id="amountV" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17">
+									</div>
+									
+									<label for="alpha">	Enter alpha:</label>
+									<input class="form-control" id="alpha" name="alpha" title="Enter alpha:" min="0.1" value="0.3">
+								
+									<label for="beta">Enter beta:</label>
+									<input class="form-control"  id="beta" name="beta" title="Enter beta:" min="0.1" value="0.3">
+									
+									<label for="decay">Enter decay rate:</label>
+									<input class="form-control"  id="decay" name="decay" title="Enter decay rate:" min="0.5" value="0.9">
+									
+									<label for="run">Number of runnings:</label>
+									<input class="form-control"  id="run" name="run" title="Runnings number:" min="1" value="5">	
+									
+									<label for="numCol">Number of colonies:</label>
+									<input class="form-control"  id="numCol" name="numCol" title="Runnings number:" min="10" value="500"><Br>
+									
+									<div class="task-file-solver">			
+										<label for="task">Select a task:	</label>
+							 			<select class="form-control" id="task" name="task">
+										  <option value=1>Task 1 [4,8]</option>
+										  <option value=2>Task 2 [5,17]</option>
+										  <option value=3>Task 3 [8,38]</option>
+										  <option value=4>Task 4 [10,10]</option>
+										  <option value=5>Task 5 [10,15]</option>
+										  <option value=6>Task 6 [15,15]</option>
+										  <option value=7>Task 7 [10,20]</option>
+										  <option value=8>Task 8 [10,30]</option>
+										  <option value=9>Task 9 [10,40]</option>
+										  <option value=10>Task 10 [10,50]</option>
+										</select>
+									</div>
+								</div>
+							<input type='submit' class="btn btn-primary btn-block"  value="Get solve">
+							</form>
+						</div>
+						
+						
+						
+					</div>
+					<div class="col-md-6 task-solver">
+						<div class="panel panel-heading">Dijkstra's algorithm</div>
+						<div  class="panel panel-body task-solver">
+					 		<form method="post">
+					 			<input type="hidden" name="customtask" value="ct">	
+					 			<input type="hidden" name="method" value="d">
+					 			<legend id="tipcolor">Input data</legend>
+					 			<div class="form-group">
+					 				<div class="task-random-solver">
+										<label for="Terminal_r">	Enter amount of terminal vertexes:</label>
+										<input class="form-control" id="Terminal_r" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5">
+										<label for="amountV_r">	Enter overall amount of vertexes:</label>
+										<input class="form-control" id="amountV_r" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17">
+									</div>
+					 				<div class="task-file-solver">	
+							 			<label for="task_d">Select a task:	</label>
+							 			<select class="form-control" id="task_d" name="task">
+											  <option value=1>Task 1 [4,8]</option>
+											  <option value=2>Task 2 [5,17]</option>
+											  <option value=3>Task 3 [8,38]</option>
+											  <option value=4>Task 4 [10,10]</option>
+											  <option value=5>Task 5 [10,15]</option>
+											  <option value=6>Task 6 [15,15]</option>
+											  <option value=7>Task 7 [10,20]</option>
+											  <option value=8>Task 8 [10,30]</option>
+											  <option value=9>Task 9 [10,40]</option>
+											  <option value=10>Task 10 [10,50]</option>
+										</select>
+									</div>
+								</div>
+								<input type='submit' class="btn btn-primary btn-block" value="Get solve">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-heading solve">Solve</div>
+			<?php 
+				include_once "Class/Main.php";
+			?>		
+		</div>
+		
+		
+		
+	</body>	
+</html>
