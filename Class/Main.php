@@ -23,8 +23,11 @@ function runSolver(ASolver $solver)
 function inputValidation(ICheck $checker)
 {
 	//$checker = new DataCheck();
-	$checker->checkField($_POST['amountV'], 3, 1000);	
-	$checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);			
+	if($_POST['customtask']!='ct')
+	{
+		$checker->checkField($_POST['amountV'], 3, 1000);	
+		$checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);	
+	}		
 	$checker->checkField($_POST['alpha'], 0, 10);
 	$checker->checkField($_POST['beta'], 0, 10);
 	$checker->checkField($_POST['decay'], 0, 10);
