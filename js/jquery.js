@@ -34,7 +34,7 @@ $(document).ready(function(){
 		.css('display','none');
 		$('.container').addClass('col-md-2 col-md-offset-10');
 		$('[class~=solve]').css('display','block');
-	});
+	});;
 	
 
 	
