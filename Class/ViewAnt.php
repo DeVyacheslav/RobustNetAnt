@@ -55,5 +55,7 @@ class ViewAnt {
 		$bestRoute = array_merge($this->method->currentRecordRoute, $temp);	
 
 		$visualization = new Visualization($bestRoute, count($this->method->currentRecordRoute), $this->task, $task_matrix);
+		echo "<script src='//d3js.org/d3.v3.min.js'></script>
+		<script src='js/Visualization.js'></script>";
 	}
 }
