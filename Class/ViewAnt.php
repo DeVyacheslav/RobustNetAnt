@@ -43,17 +43,10 @@ class ViewAnt {
 		if($temp[0] == $this->method->currentRecordRoute[0]){
 			$temp = array_reverse($temp);
 		}
-		if(count($temp)!=2)
-		{
-			array_shift($temp);
-			array_pop($temp);
-		}
-		foreach($this->method->currentRecordRoute as $val){
-			echo $val." ";
-		}
-		foreach($temp as $val){
-			echo $val." ";
-		}
+
+		array_shift($temp);
+		array_pop($temp);
+
 		$bestRoute = array_merge($this->method->currentRecordRoute, $temp);	
 
 		$visualization = new Visualization($bestRoute, count($this->method->currentRecordRoute), $this->task, $task_matrix);
