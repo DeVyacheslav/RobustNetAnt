@@ -112,5 +112,3 @@ d3.json("miserables.json", function(error, graph) {
               
   });
 });
-
-</script>

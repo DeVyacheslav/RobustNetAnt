@@ -55,8 +55,12 @@ class Visualization {
 				}*/
 				
 			$k++;
+		
 			}
 		}
+		$last = count($route)-1;
+		//звязати початок і кінець
+		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$last, "value"=>$this->task_matrix[$route[0]][$route[$last]]);	
 		return json_encode($this->jsonMatrix);//str_replace(array('[',), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
 		
 	}
