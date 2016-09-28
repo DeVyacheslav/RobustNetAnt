@@ -40,7 +40,7 @@
 						
 						<div class="panel panel-heading">Ant algorithm</div>
 						<div class="panel panel-body task-solver">
-							<form method="post">
+							<form method="post" action="Main.php">
 				   				<input type="hidden" name="method" value="ant">
 				   				<input type="hidden" name="customtask" value="ct">
 					 			 
@@ -97,7 +97,7 @@
 					<div class="col-md-6 task-solver">
 						<div class="panel panel-heading">Dijkstra's algorithm</div>
 						<div  class="panel panel-body task-solver">
-					 		<form method="post">
+					 		<form method="post" action="Main.php">
 					 			<input type="hidden" name="customtask" value="ct">	
 					 			<input type="hidden" name="method" value="d">
 					 			<legend id="tipcolor">Input data</legend>
@@ -131,9 +131,7 @@
 				</div>
 			</div>
 			<div class="panel panel-heading solve">Solve</div>
-			<?php 
-				include_once "Class/Main.php";
-			?>		
+		
 		</div>
 		
 		

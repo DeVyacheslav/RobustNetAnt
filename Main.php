@@ -1,6 +1,6 @@
 <?php
 require_once "Class/Autoloader.php";
-
+include "index.html";
 	autoloadFiles();
 	
 	inputValidation(new DataCheck);
