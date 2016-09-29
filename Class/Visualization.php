@@ -40,7 +40,8 @@ class Visualization {
 	{
 		$k=0;
 		//echo "AAA".
-		for ($i=0; $i < count($route)-1; $i++) { 
+		$count = count($route)-1;
+		for ($i=0; $i < $count; $i++) { 
 			if($this->task_matrix[$route[$i]][$route[$i+1]]!=TaskGenerator::$BigNum)
 			{
 				if($i!=$this->firstRouteCount ){
@@ -48,11 +49,8 @@ class Visualization {
 				}elseif($route[$i+1] < $i){
 					$key = array_search($route[$i+1], $names);
 					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$i+1]]);
-					//$this->jsonMatrix[$k+1]= array("source"=>$route[$i+1], "target"=>0, "value"=>$this->task_matrix[$route[$i+1]][$route[0]]);
+					
 				}
-				/*elseif($i == count($route)-2){
-					$this->jsonMatrix[$k]= array("source"=>$route[$i+1], "target"=>0, "value"=>$this->task_matrix[$route[$i+1]][$route[0]]);
-				}*/
 				
 			$k++;
 		
