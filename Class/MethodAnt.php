@@ -91,9 +91,10 @@ class MethodAnt implements IMethod {
 	
 	public function costCalculator($cost, $flag)
 	{
-		$count1=count($this->secondRoute)-1;
-		$count2=count($this->currentRecordRoute)-1;
-		for ($i=0; $i < $count1; $i++) {
+
+		$count = count($this->secondRoute)-1;
+		$count2 = count($this->currentRecordRoute)-1;
+		for ($i=0; $i < $count; $i++) {
 			for ($j=0; $j < $count2; $j++) {
 				$from = $this->secondRoute[$i];
 				$to = $this->secondRoute[$i+1];
@@ -265,7 +266,7 @@ class MethodAnt implements IMethod {
 			$from = $route[$i];
 			$to = $route[$i+1]; 
 			if(in_array($from, $this->task->tabuArray) 
-			||in_array($from, $this->task->tabuArray) )
+			||in_array($to, $this->task->tabuArray) )
 			{
 				$this->pheromone[$from][$to] = TaskGenerator::$BigNum;
 				$this->pheromone[$to][$from] = TaskGenerator::$BigNum;

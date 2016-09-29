@@ -48,7 +48,7 @@ class Visualization {
 		}
 		$last = array_search($route[$count],$names);
 		//звязати початок і кінець
-		$this->jsonMatrix[$k]= array("source"=>$last, "target"=>0, "value"=>$this->task_matrix[$route[$last]][$route[0]]);	
+		$this->jsonMatrix[$k]= array("source"=>$last, "target"=>0, "value"=>$this->task_matrix[$route[$count]][$route[0]]);	
 		return json_encode($this->jsonMatrix);
 		
 	}
