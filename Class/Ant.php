@@ -96,8 +96,8 @@ class Ant{
 	public function globalUpdate($start, $move)
 	{
 			if($this->pheromone[$start][$move] > 0.001 
-			&& !in_array($start, $this->task->tabuArray)
-			&& !in_array($move, $this->task->tabuArray)) 		
+			/*&& !in_array($start, $this->task->tabuArray)
+			&& !in_array($move, $this->task->tabuArray)*/) 		
 			 {
 				$this->pheromone[$start][$move] =  $this->Pg*$this->pheromone[$start][$move]+
 				 (1-$this->Pg) * $this->sumAnt($start, $move);
@@ -109,21 +109,21 @@ class Ant{
 	
 	public function addPheromone($start, $move)
 	{
-			if(!in_array($start, $this->task->tabuArray) 
+			/*if(!in_array($start, $this->task->tabuArray) 
 			&& !in_array($move, $this->task->tabuArray))
-			{
+			{*/
 				$this->pheromone[$start][$move] = $this->pheromone[$start][$move]
 				+ $this->Mu * (1 - $this->pheromone[$start][$move]);
 				$this->pheromone[$move][$start] = $this->pheromone[$start][$move];
-			}
+			//}
 	}
 	
 	
 	public function reducePheromone($start, $move)
 	{
 		 	if($this->pheromone[$start][$move] > 0.001 
-		 	&& !in_array($start, $this->task->tabuArray) 
-			&& !in_array($move, $this->task->tabuArray)) 		
+		 	/*&& !in_array($start, $this->task->tabuArray) 
+			&& !in_array($move, $this->task->tabuArray)*/) 		
 			 {
 				 $this->pheromone[$start][$move] = (float)$this->Mu * $this->pheromone[$start][$move];
 				 $this->pheromone[$move][$start] = $this->pheromone[$start][$move];	
