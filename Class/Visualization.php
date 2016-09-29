@@ -39,18 +39,19 @@ class Visualization {
 	{
 		$k=0;
 		$count = count($route)-1;
+		var_dump($names);
+		var_dump($route);
 		for ($i=0; $i < $count; $i++) { 
-				if($i!=$this->firstRouteCount ){
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$i+1, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
-				}else{
 					$key = array_search($route[$i], $names);
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$key]]);
-				}
+					$key2 = array_search($route[$i+1], $names);
+					$this->jsonMatrix[$k]= array("source"=>$key, "target"=>$key2, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
 				
 			$k++;
 		}
+		$last = array_search($route[$count],$names);
+		echo "<br>key= $last, key2= 0, route= $route[$last], route+1= ".$route[0];
 		//звязати початок і кінець
-		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$count, "value"=>$this->task_matrix[$route[0]][$route[$count]]);	
+		$this->jsonMatrix[$k]= array("source"=>$last, "target"=>0, "value"=>$this->task_matrix[$route[$last]][$route[0]]);	
 		return json_encode($this->jsonMatrix);
 		
 	}
@@ -59,14 +60,14 @@ class Visualization {
 	
 	public function Route_visualization($route){
 		$names = array_unique($route); 
-		
+		$names = array_values($names);
 		$fp = fopen('miserables.json', 'w');
 		
 		fwrite($fp, "{");
 		fwrite($fp, ' "nodes":[');
 		$count = count($names);
 		for ($i=0; $i < $count; $i++) {
-			if($i+1 == $count){
+			if($i == $count-1){
 				if (in_array($names[$i], $this->task->taskTerminal)) {
 					fwrite($fp, '{"name":"Terminal'.$names[$i].'","group":1}');
 					break;
