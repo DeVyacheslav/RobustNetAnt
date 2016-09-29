@@ -186,8 +186,8 @@ class Ant{
 	 $this->pkm = array();
 	 
 			//розглядаються всі можливі шляхи
-	 		for ($i=0; $i < $this->task->amountV; $i++) {
-	 			 			
+	 		//for ($i=0; $i < $this->task->amountV; $i++) {
+	 		while($i < $this->task->amountV){	 			
 				//вершина без циклу, та немає шляху до відсутнього ребра, не повертається назад
 	 			if($this->pheromone[$this->start][$i]!= TaskGenerator::$BigNum && $this->pheromone[$this->start][$i]!=0
 				&& $this->task->Matrix[$this->start][$i]!=TaskGenerator::$BigNum && $this->task->Matrix[$this->start][$i]!=0
@@ -219,7 +219,7 @@ class Ant{
 			 		 //не існує шляху - не можливо обрати
 			 		 array_push($this->pkm, TaskGenerator::$BigNum); 				
 			 	}
-
+				++$i;
 			 }
 		 
 	 }
