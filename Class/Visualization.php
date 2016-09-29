@@ -42,8 +42,8 @@ class Visualization {
 		//echo "AAA".
 		$count = count($route)-1;
 		for ($i=0; $i < $count; $i++) { 
-			if($this->task_matrix[$route[$i]][$route[$i+1]]!=TaskGenerator::$BigNum)
-			{
+			/*if($this->task_matrix[$route[$i]][$route[$i+1]]!=TaskGenerator::$BigNum)
+			{*/
 				if($i!=$this->firstRouteCount ){
 					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$i+1, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
 				}elseif($route[$i+1] < $i){
@@ -54,11 +54,10 @@ class Visualization {
 				
 			$k++;
 		
-			}
+			//}
 		}
-		$last = count($route)-1;
 		//звязати початок і кінець
-		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$last, "value"=>$this->task_matrix[$route[0]][$route[$last]]);	
+		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$count, "value"=>$this->task_matrix[$route[0]][$route[$count]]);	
 		return json_encode($this->jsonMatrix);//str_replace(array('[',), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
 		
 	}
