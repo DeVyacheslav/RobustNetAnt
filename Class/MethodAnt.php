@@ -175,11 +175,9 @@ class MethodAnt implements IMethod {
 					for ($i=0; $i < $this->antNum; $i++) {
 						
 						//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
-						//$this->startPoint();
 
 						$ant = new Ant(
 						$this->task,
-						//$this->start,
 						$this->pheromone,
 						$this->antMatrix, 
 						$this->currentRecordRoute, 
@@ -210,7 +208,6 @@ class MethodAnt implements IMethod {
 								//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
 							}elseif($this->meanCF <= $ant->CF )
 							{
-								//echo "<br>".$this->meanCF."<=".$ant->CF;	
 								$ant->updatePheromone(2, $ant->route);
 							}
 						}
@@ -292,22 +289,6 @@ class MethodAnt implements IMethod {
 		$this->task->tabuArray =  array(end($this->currentRecordRoute), $this->currentRecordRoute[0]);
 			
 	}
-
-
-
-/*
- * Вибір початкової вершини
- */ 
-	/*moved to ANT
-	 * public function startPoint()
-	{			
-		
-		$this->start = mt_rand(0, count($this->task->tabuArray)-1);
-	
-		$this->start = $this->task->tabuArray[$this->start];
-		
-	}
-	*/
 	
 	
 	public function getMeanCF($CF)
