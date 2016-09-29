@@ -23,8 +23,8 @@ class MethodDij{
 		$this->c = $task->Matrix;
 		
 		$time_pre = microtime(true);
-		
-		for($i=0; $i < count($task->tabuArray)-1; $i++){
+		$count = count($task->tabuArray)-1;
+		for($i=0; $i < $count; $i++){
 			$xn = $i;
 			$xk = $i+1;
 			$this->Dijkstra($task, $xn, $xk);
@@ -46,7 +46,7 @@ class MethodDij{
 		/*$this->c[$xn][$this->route[0][1]]= TaskGenerator::$BigNum;
 		$this->c[$this->route[0][1]][$xn]= TaskGenerator::$BigNum;*/
 		//exit;
-		for ($i=0; $i < count($task->tabuArray); $i++) {
+		for ($i=0; $i < $count; $i++) {
 			if(in_array($this->route1[$i], $task->tabuArray) || in_array($this->route1[$i+1], $task->tabuArray))	 
 			{
 				$this->c[$this->route1[$i]][$this->route1[$i+1]]= TaskGenerator::$BigNum;
@@ -63,7 +63,8 @@ class MethodDij{
 		$this->partial_path = explode(",",$this->path[$this->p]);
 		
 		echo "<br>Path 2: ";
-		for ($i=0; $i < count($this->partial_path) ; $i++) {
+		$count2 =count($this->partial_path)-1;
+		for ($i=0; $i < $count2 ; $i++) {
 			if($i!=0) 
 				echo ", ".$this->partial_path[$i];
 			else {
@@ -78,9 +79,9 @@ class MethodDij{
 		$solver_d_time = $time_post - $time_pre;
 		$cost =$this->cost1+$this->cost2;
 		echo "<br> Total cost: ".$cost;
-		
-		for ($i=0; $i < count($this->partial_path)-1; $i++) {
-			for ($j=0; $j < count($this->route1)-1; $j++) {
+		$count3 =count($this->route1)-1;
+		for ($i=0; $i < $count2; $i++) {
+			for ($j=0; $j < $count3; $j++) {
 				 //echo "<br>".$this->route1[$j]."==".$this->partial_path[$i]." and ".$this->route1[$j+1]."==".$this->partial_path[$i+1];
 				if($this->route1[$j]==(int)$this->partial_path[$i] && $this->route1[$j+1]==(int)$this->partial_path[$i+1])
 					{
@@ -95,8 +96,8 @@ class MethodDij{
 		echo "REVERS";*/
 		$this->partial_path=array_reverse($this->partial_path);
 		//var_dump($this->partial_path);
-		for ($i=0; $i < count($this->partial_path)-1; $i++) {
-			for ($j=0; $j < count($this->route1)-1; $j++) {
+		for ($i=0; $i < $count2; $i++) {
+			for ($j=0; $j < $count3; $j++) {
 				 //echo "<br>".$this->route1[$j]."==".$this->partial_path[$i]." and ".$this->route1[$j+1]."==".$this->partial_path[$i+1];
 				if($this->route1[$j]==(int)$this->partial_path[$i] && $this->route1[$j+1]==(int)$this->partial_path[$i+1])
 					{

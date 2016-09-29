@@ -40,7 +40,7 @@ class MethodAnt implements IMethod {
 		$this->task = $task;
 		//DataCheck::checkField($_POST['numCol'], 10, 10000);
 		$this->generation = $_POST['numCol'];
-		//$this->fillAntMatrix();
+		$this->fillAntMatrix();
 		//$this->setAntNum();
 		$this->createPheromone();
 		
@@ -91,8 +91,10 @@ class MethodAnt implements IMethod {
 	
 	public function costCalculator($cost, $flag)
 	{
-		for ($i=0; $i < count($this->secondRoute)-1; $i++) {
-			for ($j=0; $j < count($this->currentRecordRoute)-1; $j++) {
+		$count1=count($this->secondRoute)-1;
+		$count2=count($this->currentRecordRoute)-1;
+		for ($i=0; $i < $count1; $i++) {
+			for ($j=0; $j < $count2; $j++) {
 				$from = $this->secondRoute[$i];
 				$to = $this->secondRoute[$i+1];
 				
@@ -143,7 +145,7 @@ class MethodAnt implements IMethod {
 			
 			if($ant->start == $ant->move)
 			{
-				$ant->CF = 9999;
+				$ant->CF = NULL;
 				$ant->updatePheromone(2, $ant->route);
 				break;	
 			}			
@@ -173,11 +175,9 @@ class MethodAnt implements IMethod {
 					for ($i=0; $i < $this->antNum; $i++) {
 						
 						//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
-						//$this->startPoint();
 
 						$ant = new Ant(
 						$this->task,
-						//$this->start,
 						$this->pheromone,
 						$this->antMatrix, 
 						$this->currentRecordRoute, 
@@ -187,7 +187,7 @@ class MethodAnt implements IMethod {
 
 						$this->antAlgorithm($ant);	
 						
-						if($ant->CF != 9999)
+						if(!is_null($ant->CF))
 						{
 							$this->getMeanCF($ant->CF);
 							array_push($this->CFlist, $ant->CF);
@@ -208,7 +208,6 @@ class MethodAnt implements IMethod {
 								//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
 							}elseif($this->meanCF <= $ant->CF )
 							{
-								//echo "<br>".$this->meanCF."<=".$ant->CF;	
 								$ant->updatePheromone(2, $ant->route);
 							}
 						}
@@ -260,7 +259,8 @@ class MethodAnt implements IMethod {
 	
 	private function blocker($route)
 	{
-		for($i=0; $i < count($route); $i++)
+		$count =count($route)-1;
+		for($i=0; $i < $count; $i++)
 		{
 			$from = $route[$i];
 			$to = $route[$i+1]; 
@@ -289,22 +289,6 @@ class MethodAnt implements IMethod {
 		$this->task->tabuArray =  array(end($this->currentRecordRoute), $this->currentRecordRoute[0]);
 			
 	}
-
-
-
-/*
- * Вибір початкової вершини
- */ 
-	/*moved to ANT
-	 * public function startPoint()
-	{			
-		
-		$this->start = mt_rand(0, count($this->task->tabuArray)-1);
-	
-		$this->start = $this->task->tabuArray[$this->start];
-		
-	}
-	*/
 	
 	
 	public function getMeanCF($CF)
@@ -340,17 +324,16 @@ class MethodAnt implements IMethod {
 	 */
 	 private function createPheromone()
 	 {
-		 for ($i=0; $i < $this->task->amountV; $i++) { 
-			 for ($j=0; $j < $this->task->amountV; $j++) {
-				 	if($this->task->Matrix[$i][$j] != TaskGenerator::$BigNum) {//перевірка на відсутні ребра
-				 		 $this->pheromone[$i][$j] = 0.5;
-				 	}
-				 	else{
-							 $this->pheromone[$i][$j] = TaskGenerator::$BigNum;//немає ребра - немає феромону
-					}	
-			 }
-		 }
+		 $this->pheromone = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0.5));
 	 }
+	 
+	 	/*
+	 *  Ініціалізації матриці кількості мурашок
+	 */ 
+	private function fillAntMatrix()
+	{
+		$this->antMatrix = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0));
+	}
 }
 
 

@@ -16,7 +16,6 @@ class Visualization {
 		$this->task = $task;
 		$this->firstRouteCount = $firstPart;
 		$this->task_matrix = $task_matrix;
-		//$this->Graph_visualization();
 		$this->Route_visualization($route);
 	}
 	public function fillJsonTask(){
@@ -39,69 +38,33 @@ class Visualization {
 	public function fillJson($route,$names)
 	{
 		$k=0;
-		//echo "AAA".
-		for ($i=0; $i < count($route)-1; $i++) { 
-			if($this->task_matrix[$route[$i]][$route[$i+1]]!=TaskGenerator::$BigNum)
-			{
-				if($i!=$this->firstRouteCount ){
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$i+1, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
-				}elseif($route[$i+1] < $i){
-					$key = array_search($route[$i+1], $names);
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$i+1]]);
-					//$this->jsonMatrix[$k+1]= array("source"=>$route[$i+1], "target"=>0, "value"=>$this->task_matrix[$route[$i+1]][$route[0]]);
-				}
-				/*elseif($i == count($route)-2){
-					$this->jsonMatrix[$k]= array("source"=>$route[$i+1], "target"=>0, "value"=>$this->task_matrix[$route[$i+1]][$route[0]]);
-				}*/
+		$count = count($route)-1;
+		for ($i=0; $i < $count; $i++) { 
+					$key = array_search($route[$i], $names);
+					$key2 = array_search($route[$i+1], $names);
+					$this->jsonMatrix[$k]= array("source"=>$key, "target"=>$key2, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
 				
 			$k++;
-		
-			}
 		}
-		$last = count($route)-1;
+		$last = array_search($route[$count],$names);
 		//звязати початок і кінець
-		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$last, "value"=>$this->task_matrix[$route[0]][$route[$last]]);	
-		return json_encode($this->jsonMatrix);//str_replace(array('[',), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
+		$this->jsonMatrix[$k]= array("source"=>$last, "target"=>0, "value"=>$this->task_matrix[$route[$last]][$route[0]]);	
+		return json_encode($this->jsonMatrix);
 		
 	}
 	
-	public function Graph_visualization(){
-		$fp = fopen('miserables.json', 'w');
-		
-		fwrite($fp, "{");
-		fwrite($fp, ' "nodes":[');
-		for ($i=0; $i < $this->task->amountV; $i++) {
-			if($i+1 == $this->task->amountV){
-				if (in_array($i, $this->task->tabuArray)) {
-					fwrite($fp, '{"name":"Terminal'.$i.'","group":1}');
-					break;
-				}else{
-					fwrite($fp, '{"name":"NonTerminal'.$i.'","group":2}');
-					break;
-				}
-			}
-			if (in_array($i, $this->task->tabuArray)) {
-				fwrite($fp, '{"name":"Terminal'.$i.'","group":1},');
-			}else{
-				fwrite($fp, '{"name":"NonTerminal'.$i.'","group":2},');
-			}		
-		}
-		fwrite($fp, '],');
-		fwrite($fp, '"links":');
-			fwrite($fp, $this->fillJsonTask());
-		//fwrite($fp, "}");
-		fclose($fp);
-	}
+	
 	
 	public function Route_visualization($route){
 		$names = array_unique($route); 
-		
+		$names = array_values($names);
 		$fp = fopen('miserables.json', 'w');
 		
 		fwrite($fp, "{");
 		fwrite($fp, ' "nodes":[');
-		for ($i=0; $i < count($names); $i++) {
-			if($i+1 == count($names)){
+		$count = count($names);
+		for ($i=0; $i < $count; $i++) {
+			if($i == $count-1){
 				if (in_array($names[$i], $this->task->taskTerminal)) {
 					fwrite($fp, '{"name":"Terminal'.$names[$i].'","group":1}');
 					break;
@@ -118,11 +81,9 @@ class Visualization {
 		}
 		fwrite($fp, '],');
 		fwrite($fp, '"links":');
-		//for ($i=0; $i < $task->amountV; $i++) { 
-	//	$fp = file_put_contents('miserables.json', ",".$this->fillJson($route)."}" , FILE_APPEND);
-			fwrite($fp, $this->fillJson($route,$names));
-		//}
-		//fwrite($fp, "]");
+
+		fwrite($fp, $this->fillJson($route,$names));
+
 		fwrite($fp, "}");
 		fclose($fp);
 	}
