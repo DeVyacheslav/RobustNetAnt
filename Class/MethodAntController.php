@@ -42,14 +42,7 @@ class MethodAntController {
 	 */ 
 	public function fillAntMatrix()
 	{
-		for($i=0; $i < $this->task->amountV; $i++)
-		{
-			for($j=0; $j < $this->task->amountV; $j++)
-				{
-					$this->method->antMatrix[$i][$j] = 0;
-					$this->method->antMatrix[$j][$i] = $this->method->antMatrix[$i][$j];
-				}
-		}
+		$this->method->antMatrix = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0));
 	}
 	
 	
