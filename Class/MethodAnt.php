@@ -262,7 +262,8 @@ class MethodAnt implements IMethod {
 	
 	private function blocker($route)
 	{
-		for($i=0; $i < count($route); $i++)
+		$count =count($route)-1;
+		for($i=0; $i < $count; $i++)
 		{
 			$from = $route[$i];
 			$to = $route[$i+1]; 
