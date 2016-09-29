@@ -100,8 +100,9 @@ class Visualization {
 		
 		fwrite($fp, "{");
 		fwrite($fp, ' "nodes":[');
-		for ($i=0; $i < count($names); $i++) {
-			if($i+1 == count($names)){
+		$count = count($names);
+		for ($i=0; $i < $count; $i++) {
+			if($i+1 == $count){
 				if (in_array($names[$i], $this->task->taskTerminal)) {
 					fwrite($fp, '{"name":"Terminal'.$names[$i].'","group":1}');
 					break;
