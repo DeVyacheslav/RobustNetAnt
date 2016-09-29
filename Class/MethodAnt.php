@@ -91,6 +91,7 @@ class MethodAnt implements IMethod {
 	
 	public function costCalculator($cost, $flag)
 	{
+
 		$count = count($this->secondRoute)-1;
 		$count2 = count($this->currentRecordRoute)-1;
 		for ($i=0; $i < $count; $i++) {
