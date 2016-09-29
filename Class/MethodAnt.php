@@ -340,16 +340,7 @@ class MethodAnt implements IMethod {
 	 */
 	 private function createPheromone()
 	 {
-		 for ($i=0; $i < $this->task->amountV; $i++) { 
-			 for ($j=0; $j < $this->task->amountV; $j++) {
-				 	if($this->task->Matrix[$i][$j] != TaskGenerator::$BigNum) {//перевірка на відсутні ребра
-				 		 $this->pheromone[$i][$j] = 0.5;
-				 	}
-				 	else{
-							 $this->pheromone[$i][$j] = TaskGenerator::$BigNum;//немає ребра - немає феромону
-					}	
-			 }
-		 }
+		 $this->pheromone = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0.5));
 	 }
 }
 
