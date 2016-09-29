@@ -145,7 +145,7 @@ class MethodAnt implements IMethod {
 			
 			if($ant->start == $ant->move)
 			{
-				$ant->CF = 9999;
+				$ant->CF = NULL;
 				$ant->updatePheromone(2, $ant->route);
 				break;	
 			}			
@@ -189,7 +189,7 @@ class MethodAnt implements IMethod {
 
 						$this->antAlgorithm($ant);	
 						
-						if($ant->CF != 9999)
+						if(!is_null($ant->CF))
 						{
 							$this->getMeanCF($ant->CF);
 							array_push($this->CFlist, $ant->CF);
