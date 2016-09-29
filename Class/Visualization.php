@@ -16,7 +16,6 @@ class Visualization {
 		$this->task = $task;
 		$this->firstRouteCount = $firstPart;
 		$this->task_matrix = $task_matrix;
-		//$this->Graph_visualization();
 		$this->Route_visualization($route);
 	}
 	public function fillJsonTask(){
@@ -39,56 +38,24 @@ class Visualization {
 	public function fillJson($route,$names)
 	{
 		$k=0;
-		//echo "AAA".
 		$count = count($route)-1;
 		for ($i=0; $i < $count; $i++) { 
-			/*if($this->task_matrix[$route[$i]][$route[$i+1]]!=TaskGenerator::$BigNum)
-			{*/
 				if($i!=$this->firstRouteCount ){
 					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$i+1, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
-				}elseif($route[$i+1] < $i){
-					$key = array_search($route[$i+1], $names);
+				}else{
+					$key = array_search($route[$i], $names);
 					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$i+1]]);
-					
 				}
 				
 			$k++;
-		
-			//}
 		}
 		//звязати початок і кінець
 		$this->jsonMatrix[$k]= array("source"=>0, "target"=>$count, "value"=>$this->task_matrix[$route[0]][$route[$count]]);	
-		return json_encode($this->jsonMatrix);//str_replace(array('[',), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
+		return json_encode($this->jsonMatrix);
 		
 	}
 	
-	public function Graph_visualization(){
-		$fp = fopen('miserables.json', 'w');
-		
-		fwrite($fp, "{");
-		fwrite($fp, ' "nodes":[');
-		for ($i=0; $i < $this->task->amountV; $i++) {
-			if($i+1 == $this->task->amountV){
-				if (in_array($i, $this->task->tabuArray)) {
-					fwrite($fp, '{"name":"Terminal'.$i.'","group":1}');
-					break;
-				}else{
-					fwrite($fp, '{"name":"NonTerminal'.$i.'","group":2}');
-					break;
-				}
-			}
-			if (in_array($i, $this->task->tabuArray)) {
-				fwrite($fp, '{"name":"Terminal'.$i.'","group":1},');
-			}else{
-				fwrite($fp, '{"name":"NonTerminal'.$i.'","group":2},');
-			}		
-		}
-		fwrite($fp, '],');
-		fwrite($fp, '"links":');
-			fwrite($fp, $this->fillJsonTask());
-		//fwrite($fp, "}");
-		fclose($fp);
-	}
+	
 	
 	public function Route_visualization($route){
 		$names = array_unique($route); 
@@ -116,11 +83,9 @@ class Visualization {
 		}
 		fwrite($fp, '],');
 		fwrite($fp, '"links":');
-		//for ($i=0; $i < $task->amountV; $i++) { 
-	//	$fp = file_put_contents('miserables.json', ",".$this->fillJson($route)."}" , FILE_APPEND);
-			fwrite($fp, $this->fillJson($route,$names));
-		//}
-		//fwrite($fp, "]");
+
+		fwrite($fp, $this->fillJson($route,$names));
+
 		fwrite($fp, "}");
 		fclose($fp);
 	}
