@@ -265,7 +265,7 @@ class MethodAnt implements IMethod {
 			$from = $route[$i];
 			$to = $route[$i+1]; 
 			if(in_array($from, $this->task->tabuArray) 
-			||in_array($from, $this->task->tabuArray) )
+			||in_array($to, $this->task->tabuArray) )
 			{
 				$this->pheromone[$from][$to] = TaskGenerator::$BigNum;
 				$this->pheromone[$to][$from] = TaskGenerator::$BigNum;
