@@ -40,7 +40,7 @@ class MethodAnt implements IMethod {
 		$this->task = $task;
 		//DataCheck::checkField($_POST['numCol'], 10, 10000);
 		$this->generation = $_POST['numCol'];
-		//$this->fillAntMatrix();
+		$this->fillAntMatrix();
 		//$this->setAntNum();
 		$this->createPheromone();
 		
@@ -342,6 +342,14 @@ class MethodAnt implements IMethod {
 	 {
 		 $this->pheromone = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0.5));
 	 }
+	 
+	 	/*
+	 *  Ініціалізації матриці кількості мурашок
+	 */ 
+	private function fillAntMatrix()
+	{
+		$this->antMatrix = array_fill(0, $this->task->amountV, array_fill(0, $this->task->amountV, 0));
+	}
 }
 
 
