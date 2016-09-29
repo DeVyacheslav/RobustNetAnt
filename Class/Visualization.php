@@ -44,7 +44,7 @@ class Visualization {
 					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$i+1, "value"=>$this->task_matrix[$route[$i]][$route[$i+1]]);
 				}else{
 					$key = array_search($route[$i], $names);
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$i+1]]);
+					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$key, "value"=>$this->task_matrix[$i][$route[$key]]);
 				}
 				
 			$k++;
