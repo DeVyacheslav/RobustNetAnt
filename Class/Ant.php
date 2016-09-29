@@ -70,7 +70,8 @@ class Ant{
 
 	public function countAnts($Route)
 	{
-		for($i=0; $i < count($Route)-1; $i++)
+		$count = count($Route)-1;
+		for($i=0; $i < $count; $i++)
 		{
 			//мураха пройшла по ребру
 			$this->antMatrix[$Route[$i]][$Route[$i+1]] +=(float)1/$this->CF;
