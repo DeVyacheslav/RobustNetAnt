@@ -39,8 +39,6 @@ class Visualization {
 	{
 		$k=0;
 		$count = count($route)-1;
-		var_dump($names);
-		var_dump($route);
 		for ($i=0; $i < $count; $i++) { 
 					$key = array_search($route[$i], $names);
 					$key2 = array_search($route[$i+1], $names);
