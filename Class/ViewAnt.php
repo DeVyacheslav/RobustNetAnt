@@ -28,7 +28,7 @@ class ViewAnt {
 		echo "<td width = '40%'>Route 1 Cost(".$this->method->record."): ";	
 		$this->controller->getRoute($this->method->recordRoute,$this->task);
 		echo "</td>";	
-		echo "<td width = '30%'>Route 2 Cost(".$this->method->secondCost."): ";
+		echo "<td width = '30%'>Route 2 Cost(".$this->method->record2."): ";
 		$this->controller->getRoute($this->method->secondRoute,$this->task);
 		echo "</td>";		
 		echo "<td width = '20%'>Timer (total): ".$this->method->timer."</td>";

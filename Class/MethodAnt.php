@@ -15,7 +15,7 @@ class MethodAnt implements IMethod {
 	private $firstRoute = array();
 	private $secondRoute = array();
 	private $firstCost = 9999;
-	private $secondCost = 9999;
+	private $record2 = 9999;
 	private $antNum;
 	private $generation;
 	private $antMatrix = array();
@@ -63,7 +63,7 @@ class MethodAnt implements IMethod {
 
 		/*$time_pre = microtime(true);
 		$TwoOpt = new TwoOpt($this->task, $this->recordRoute, $this->record);
-		$TwoOpt = new TwoOpt($this->task, $this->secondRoute, $this->secondCost);
+		$TwoOpt = new TwoOpt($this->task, $this->secondRoute, $this->record2);
 		$time_post = microtime(true);*/
 		
 		$TwoOpt_time = 0/*$time_post - $time_pre*/;
@@ -116,7 +116,7 @@ class MethodAnt implements IMethod {
 
 	public function getCost()
 	{
-		$cost = $this->record +$this->secondCost;
+		$cost = $this->record +$this->record2;
 
 		$cost = $this->costCalculator($cost, false);
 		
@@ -222,7 +222,7 @@ class MethodAnt implements IMethod {
 			}else
 			{
 				$this->updateRecord($this->genCF, $this->genRoute, 
-				$this->secondCost, $this->secondRoute);
+				$this->record2, $this->secondRoute);
 			}
 
 			$ant->updatePheromone(0, $ant->route);
