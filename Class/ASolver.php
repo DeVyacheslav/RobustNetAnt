@@ -25,7 +25,7 @@ abstract class ASolver {
 				
 				$solver->run($controller);
 				
-				$temp = $solver->currentRecord+$solver->secondCost;
+				$temp = $solver->record+$solver->record2;
 				
 				$view = new ViewAnt($solver, $controller, $task);
 				

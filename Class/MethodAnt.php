@@ -6,16 +6,16 @@
 class MethodAnt implements IMethod {
 	private $genCF = 9999;
 	private $genRoute = array();
-	private $currentRecord = 9999;
-	private $currentRecordRoute = array();
+	private $record = 9999;
+	private $recordRoute = array();
 	private $numRecord = 20;
 	private $pheromone;
 	private $start;
 	private $bigTask = false;
 	private $firstRoute = array();
-	private $secondRoute = array();
+	private $recordRoute2 = array();
 	private $firstCost = 9999;
-	private $secondCost = 9999;
+	private $record2 = 9999;
 	private $antNum;
 	private $generation;
 	private $antMatrix = array();
@@ -62,8 +62,8 @@ class MethodAnt implements IMethod {
 		$exec_time = $time_post - $time_pre;
 
 		/*$time_pre = microtime(true);
-		$TwoOpt = new TwoOpt($this->task, $this->currentRecordRoute, $this->currentRecord);
-		$TwoOpt = new TwoOpt($this->task, $this->secondRoute, $this->secondCost);
+		$TwoOpt = new TwoOpt($this->task, $this->recordRoute, $this->record);
+		$TwoOpt = new TwoOpt($this->task, $this->recordRoute2, $this->record2);
 		$time_post = microtime(true);*/
 		
 		$TwoOpt_time = 0/*$time_post - $time_pre*/;
@@ -92,15 +92,15 @@ class MethodAnt implements IMethod {
 	public function costCalculator($cost, $flag)
 	{
 
-		$count = count($this->secondRoute)-1;
-		$count2 = count($this->currentRecordRoute)-1;
+		$count = count($this->recordRoute2)-1;
+		$count2 = count($this->recordRoute)-1;
 		for ($i=0; $i < $count; $i++) {
 			for ($j=0; $j < $count2; $j++) {
-				$from = $this->secondRoute[$i];
-				$to = $this->secondRoute[$i+1];
+				$from = $this->recordRoute2[$i];
+				$to = $this->recordRoute2[$i+1];
 				
-				if($this->currentRecordRoute[$j] == $from 
-				&& $this->currentRecordRoute[$j+1] == $to)
+				if($this->recordRoute[$j] == $from 
+				&& $this->recordRoute[$j+1] == $to)
 					{
 
 							$cost-=$this->task->Matrix[$from][$to];
@@ -116,11 +116,11 @@ class MethodAnt implements IMethod {
 
 	public function getCost()
 	{
-		$cost = $this->currentRecord +$this->secondCost;
+		$cost = $this->record +$this->record2;
 
 		$cost = $this->costCalculator($cost, false);
 		
-		$this->secondRoute=array_reverse($this->secondRoute);
+		$this->recordRoute2=array_reverse($this->recordRoute2);
 		
 		$cost = $this->costCalculator($cost, true);
 
@@ -164,99 +164,95 @@ class MethodAnt implements IMethod {
 	 */ 
 	public function findRoute($reuse)
 	{
-			$this->generation = $_POST['numCol'];
-			if($reuse)
-			{			
-				$this->blockEdges();
-			}
-			
-				while($this->generation !=0)
+		$this->generation = $_POST['numCol'];
+		if($reuse)
+		{			
+			$this->blockEdges();
+		}
+		
+		while($this->generation !=0)
+		{
+
+			for ($i=0; $i < $this->antNum; $i++) {
+				
+				//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
+
+				$ant = new Ant(
+				$this->task,
+				$this->pheromone,
+				$this->antMatrix, 
+				$this->recordRoute, 
+				$this->alpha,
+				$this->beta, 
+				$this->Pg);	
+
+				$this->antAlgorithm($ant);	
+				
+				if(!is_null($ant->CF))
 				{
+					$this->getMeanCF($ant->CF);
+					array_push($this->CFlist, $ant->CF);
+				
+					if($this->updateRecord($ant->CF, $ant->route, $this->genCF, $this->genRoute)){
+						$ant->countAnts($ant->route);	
 
-					for ($i=0; $i < $this->antNum; $i++) {
-						
-						//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
+						$ant->updatePheromone(1, $ant->route);							
 
-						$ant = new Ant(
-						$this->task,
-						$this->pheromone,
-						$this->antMatrix, 
-						$this->currentRecordRoute, 
-						$this->alpha,
-						$this->beta, 
-						$this->Pg);	
-
-						$this->antAlgorithm($ant);	
-						
-						if(!is_null($ant->CF))
-						{
-							$this->getMeanCF($ant->CF);
-							array_push($this->CFlist, $ant->CF);
-						
-							
-							if($ant->CF < $this->genCF)
-							{
-								
-								$ant->countAnts($ant->route);	
-								
-								$this->genCF = $ant->CF;
-								
-								$this->genRoute = $ant->route;
-								
-								$ant->updatePheromone(1, $ant->route);							
-								
-								
-								//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
-							}elseif($this->meanCF <= $ant->CF )
-							{
-								$ant->updatePheromone(2, $ant->route);
-							}
-						}
-					}
-
-					$this->CFlist = array();
-					if(!$reuse)
+						//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
+					}elseif($this->meanCF <= $ant->CF )
 					{
-						if($this->genCF < $this->currentRecord)
-						{
-							
-							$this->currentRecord = $this->genCF;	
-							$this->currentRecordRoute = $this->genRoute;
-							$this->setNumRecord();
-						}
-					}else
-					{
-						if($this->genCF < $this->secondCost)
-						{
-							$this->secondCost = $this->genCF;	
-							$this->secondRoute = $this->genRoute;
-							$this->setNumRecord();
-						}
+						$ant->updatePheromone(2, $ant->route);
 					}
-
-					$ant->updatePheromone(0, $ant->route);
-					
-					if ($this->numRecord == 0) 
-					{							
-						if(!$reuse)
-						{
-							$this->startList = array();
-							$this->setNumRecord();
-							$this->genCF =9999;
-							$this->temp = 0;
-							$this->findRoute(true);
-						}
-						
-						break;
-					}
-					$this->numRecord--;
-					$this->genCF = 9999;
-					$this->startList = array();
-					$this->generation--;
 				}
+			}
+
+			$this->CFlist = array();
+			if(!$reuse)
+			{
+				if($this->updateRecord($this->genCF, $this->genRoute, $this->record, $this->recordRoute)){
+					$this->setNumRecord();
+				}
+			}else
+			{
+				if($this->updateRecord($this->genCF, $this->genRoute, $this->record2, $this->recordRoute2)){
+					$this->setNumRecord();
+				}
+			}
+
+			$ant->updatePheromone(0, $ant->route);
+			
+			if ($this->numRecord == 0) 
+			{							
+				if(!$reuse)
+				{
+					$this->startList = array();
+					$this->setNumRecord();
+					$this->genCF =9999;
+					$this->temp = 0;
+					$this->findRoute(true);
+				}
+				
+				break;
+			}
+			$this->numRecord--;
+			$this->genCF = 9999;
+			$this->startList = array();
+			$this->generation--;
+		}
 	}
 
-
+	private function updateRecord($currentCF, $currentRoute , &$recordCF, &$recordRoute)
+	{
+		if($currentCF < $recordCF){
+			$recordCF = $currentCF;	
+			$recordRoute = $currentRoute;
+			
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 	private function blocker($route)
 	{
@@ -281,13 +277,13 @@ class MethodAnt implements IMethod {
 	{
 		$this->generation = $_POST['numCol'];
 	
-		$this->blocker($this->currentRecordRoute);
+		$this->blocker($this->recordRoute);
 		
-		$tempRoute = array_reverse($this->currentRecordRoute);
+		$tempRoute = array_reverse($this->recordRoute);
 		
 		$this->blocker($tempRoute);
 			
-		$this->task->tabuArray =  array(end($this->currentRecordRoute), $this->currentRecordRoute[0]);
+		$this->task->tabuArray =  array(end($this->recordRoute), $this->recordRoute[0]);
 			
 	}
 	

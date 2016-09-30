@@ -1,12 +1,12 @@
 
-var width = 1200,
-    height = 1000;
+var width = 600,
+    height = 500;
 
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
     .charge(-120) //120
-    .linkDistance(function(d) { return  d.value*20; }) //30
+    .linkDistance(function(d) { return d.value <20 ? d.value*20 : d.value*5; }) //30
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")

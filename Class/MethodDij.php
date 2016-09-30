@@ -63,7 +63,7 @@ class MethodDij{
 		$this->partial_path = explode(",",$this->path[$this->p]);
 		
 		echo "<br>Path 2: ";
-		$count2 =count($this->partial_path)-1;
+		$count2 =count($this->partial_path);
 		for ($i=0; $i < $count2 ; $i++) {
 			if($i!=0) 
 				echo ", ".$this->partial_path[$i];
@@ -90,6 +90,7 @@ class MethodDij{
 							break;
 					}
 			}
+			
 		}
 		
 		/*var_dump($this->partial_path);
@@ -112,7 +113,7 @@ class MethodDij{
 		echo "<br>Network cost: ".$cost;
 		echo "<br>Time: ".$solver_d_time;
 		
-
+		$visualization = new Visualization($this->route1+$this->partial_path, $task, $task->Matrix);
 	}
 	
 	public function getRoute($route)

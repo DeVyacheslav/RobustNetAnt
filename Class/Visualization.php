@@ -8,31 +8,17 @@ class Visualization {
 	public $jsonMatrix;
 	public $task_matrix;
 	public $task;
-	public $firstRouteCount;
 
 	
-	function __construct($route, $firstPart, $task, $task_matrix) {
+	function __construct($route, $task, $task_matrix) {
 		//$this->fillJson($route, $task_matrix);
 		$this->task = $task;
-		$this->firstRouteCount = $firstPart;
 		$this->task_matrix = $task_matrix;
 		$this->Route_visualization($route);
+		echo "<script src='//d3js.org/d3.v3.min.js'></script>
+		<script src='js/Visualization.js'></script>";
 	}
-	public function fillJsonTask(){
-		$k=0;
-		for ($i=0; $i < $this->task->amountV; $i++) { 
-			for ($j=0; $j < $this->task->amountV; $j++) { 
-				if($i!=$j && $this->task_matrix[$i][$j]!=TaskGenerator::$BigNum)
-				{
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$j, "value"=>$this->task_matrix[$i][$j]);
-					$k++;
-				}
-			}
-		}
-		
-		return str_replace(array(']'), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
-		//json_encode($this->jsonMatrix);
-	}
+	
 	
 	
 	public function fillJson($route,$names)
