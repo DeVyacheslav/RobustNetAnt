@@ -20,22 +20,6 @@ class Visualization {
 	}
 	
 	
-	public function fillJsonTask(){
-		$k=0;
-		for ($i=0; $i < $this->task->amountV; $i++) { 
-			for ($j=0; $j < $this->task->amountV; $j++) { 
-				if($i!=$j && $this->task_matrix[$i][$j]!=TaskGenerator::$BigNum)
-				{
-					$this->jsonMatrix[$k]= array("source"=>$i, "target"=>$j, "value"=>$this->task_matrix[$i][$j]);
-					$k++;
-				}
-			}
-		}
-		
-		return str_replace(array(']'), '', htmlspecialchars(json_encode($this->jsonMatrix), ENT_NOQUOTES));
-		//json_encode($this->jsonMatrix);
-	}
-	
 	
 	public function fillJson($route,$names)
 	{
