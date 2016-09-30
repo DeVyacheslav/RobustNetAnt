@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="css/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/jquery.js"></script>
+		<script src="js/ajax.js"></script>
 		
 	</head>
 	
@@ -49,27 +50,34 @@
 									<div class="task-random-solver">
 										<label for="Terminal">	Enter amount of terminal vertexes:</label>
 										 
-										<input class="form-control" id="Terminal" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5">
+										<input class="form-control" id="Terminal" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5" onkeyup="showError(this.value)">
+										
 
 										
 										<label for="amountV">	Enter overall amount of vertexes:</label>
-										<input class="form-control" id="amountV" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17">
+										<input class="form-control" id="amountV" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17" onkeyup="showError(this.value)">
+										
 									</div>
 									
 									<label for="alpha">	Enter alpha:</label>
-									<input class="form-control" id="alpha" name="alpha" title="Enter alpha:" min="0.1" value="0.3">
+									<input class="form-control" id="alpha" name="alpha" title="Enter alpha:" min="0.1" value="0.3" onkeyup="showError(this.value)">
+									
 								
 									<label for="beta">Enter beta:</label>
-									<input class="form-control"  id="beta" name="beta" title="Enter beta:" min="0.1" value="0.3">
+									<input class="form-control"  id="beta" name="beta" title="Enter beta:" min="0.1" value="0.3" onkeyup="showError(this.value)">
+									
 									
 									<label for="decay">Enter decay rate:</label>
-									<input class="form-control"  id="decay" name="decay" title="Enter decay rate:" min="0.5" value="0.9">
+									<input class="form-control"  id="decay" name="decay" title="Enter decay rate:" min="0.5" value="0.9" onkeyup="showError(this.value)">
+									
 									
 									<label for="run">Number of runnings:</label>
-									<input class="form-control"  id="run" name="run" title="Runnings number:" min="1" value="5">	
+									<input class="form-control"  id="run" name="run" title="Runnings number:" min="1" value="5" onkeyup="showError(this.value)">	
+									
 									
 									<label for="numCol">Number of colonies:</label>
-									<input class="form-control"  id="numCol" name="numCol" title="Runnings number:" min="10" value="500"><Br>
+									<input class="form-control"  id="numCol" name="numCol" title="Runnings number:" min="10" value="500" onkeyup="showError(this.value)"><Br>
+									
 									
 									<div class="task-file-solver">			
 										<label for="task">Select a task:	</label>
@@ -104,9 +112,13 @@
 					 			<div class="form-group">
 					 				<div class="task-random-solver">
 										<label for="Terminal_r">	Enter amount of terminal vertexes:</label>
-										<input class="form-control" id="Terminal_r" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5">
+										<input class="form-control" id="Terminal_r" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5" onkeyup="showError(this.value)">
+										
+										
 										<label for="amountV_r">	Enter overall amount of vertexes:</label>
-										<input class="form-control" id="amountV_r" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17">
+										<input class="form-control" id="amountV_r" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17" onkeyup="showError(this.value)">
+										
+										
 									</div>
 					 				<div class="task-file-solver">	
 							 			<label for="task_d">Select a task:	</label>
