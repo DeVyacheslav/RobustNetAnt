@@ -1,7 +1,10 @@
 <?php
 require_once "Class/Autoloader.php";
 include "index.html";
-	autoloadFiles();
+	//autoloadFiles();
+	spl_autoload_register(function ($class) {
+	    include 'Class/' . $class . '.php';
+	});
 	
 	inputValidation(new DataCheck);
 

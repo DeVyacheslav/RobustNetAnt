@@ -71,7 +71,7 @@ abstract class ATask
 		 //$this->createFile($task); 
 	}
 }
-
+/*
 class CustomTask extends ATask{
 	 	
 	public function selectTV(){
@@ -101,8 +101,8 @@ class CustomTask extends ATask{
 			
 		}
 	}
-}
-
+}*/
+/*
 class FullTask extends ATask{
 
 	
@@ -115,7 +115,7 @@ class FullTask extends ATask{
 	
 	/*
 	 * 
-	 */
+	 
 	 public function selectTV()
 	 {
 	 	 $tempMax = $this->amountV-1;	 
@@ -141,9 +141,7 @@ class FullTask extends ATask{
 	 
 
 	
-	/*
-	 * * 
-	 */
+
 	public function fillMatrix()
 	{
 		for ($i=0; $i < $this->amountV; $i++) {
@@ -163,5 +161,5 @@ class FullTask extends ATask{
 		$this->start=0;
 	}
 		
-}
+}*/
 ?>

@@ -1,7 +1,7 @@
 <?php
 function autoloadFiles()
 {
-	require_once "Class/TaskGenerator.php";
+	/*require_once "Class/TaskGenerator.php";
 	require_once 'Class/IMethod.php';
 	require_once "Class/MethodAnt.php";
 	require_once "Class/MethodDij.php";	
@@ -14,5 +14,5 @@ function autoloadFiles()
 	require_once 'Class/TwoOpt.php';
 	require_once 'Class/Ant.php';
 	require_once 'Class/CustomSolver.php';
-	require_once 'Class/RandomSolver.php';
+	require_once 'Class/RandomSolver.php';*/
 }
