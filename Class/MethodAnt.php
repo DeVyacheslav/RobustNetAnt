@@ -193,9 +193,7 @@ class MethodAnt implements IMethod {
 					$this->getMeanCF($ant->CF);
 					array_push($this->CFlist, $ant->CF);
 				
-					if($this->updateRecord($ant->CF, $ant->route, 
-					$this->genCF, $this->genRoute))
-					{
+					if($this->updateRecord($ant->CF, $ant->route, $this->genCF, $this->genRoute)){
 						$ant->countAnts($ant->route);	
 
 						$ant->updatePheromone(1, $ant->route);							
