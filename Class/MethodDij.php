@@ -63,7 +63,7 @@ class MethodDij{
 		$this->partial_path = explode(",",$this->path[$this->p]);
 		
 		echo "<br>Path 2: ";
-		$count2 =count($this->partial_path)-1;
+		$count2 =count($this->partial_path);
 		for ($i=0; $i < $count2 ; $i++) {
 			if($i!=0) 
 				echo ", ".$this->partial_path[$i];
