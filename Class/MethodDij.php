@@ -90,6 +90,7 @@ class MethodDij{
 							break;
 					}
 			}
+			
 		}
 		
 		/*var_dump($this->partial_path);
@@ -112,7 +113,7 @@ class MethodDij{
 		echo "<br>Network cost: ".$cost;
 		echo "<br>Time: ".$solver_d_time;
 		
-
+		$visualization = new Visualization($this->route1+$this->partial_path, $task, $task->Matrix);
 	}
 	
 	public function getRoute($route)
