@@ -164,99 +164,99 @@ class MethodAnt implements IMethod {
 	 */ 
 	public function findRoute($reuse)
 	{
-			$this->generation = $_POST['numCol'];
-			if($reuse)
-			{			
-				$this->blockEdges();
-			}
-			
-				while($this->generation !=0)
+		$this->generation = $_POST['numCol'];
+		if($reuse)
+		{			
+			$this->blockEdges();
+		}
+		
+		while($this->generation !=0)
+		{
+
+			for ($i=0; $i < $this->antNum; $i++) {
+				
+				//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
+
+				$ant = new Ant(
+				$this->task,
+				$this->pheromone,
+				$this->antMatrix, 
+				$this->currentRecordRoute, 
+				$this->alpha,
+				$this->beta, 
+				$this->Pg);	
+
+				$this->antAlgorithm($ant);	
+				
+				if(!is_null($ant->CF))
 				{
-
-					for ($i=0; $i < $this->antNum; $i++) {
-						
-						//кожна мурашка буде починати з випадково обраноъ термынальноъ вершини	
-
-						$ant = new Ant(
-						$this->task,
-						$this->pheromone,
-						$this->antMatrix, 
-						$this->currentRecordRoute, 
-						$this->alpha,
-						$this->beta, 
-						$this->Pg);	
-
-						$this->antAlgorithm($ant);	
-						
-						if(!is_null($ant->CF))
-						{
-							$this->getMeanCF($ant->CF);
-							array_push($this->CFlist, $ant->CF);
-						
-							
-							if($ant->CF < $this->genCF)
-							{
-								
-								$ant->countAnts($ant->route);	
-								
-								$this->genCF = $ant->CF;
-								
-								$this->genRoute = $ant->route;
-								
-								$ant->updatePheromone(1, $ant->route);							
-								
-								
-								//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
-							}elseif($this->meanCF <= $ant->CF )
-							{
-								$ant->updatePheromone(2, $ant->route);
-							}
-						}
-					}
-
-					$this->CFlist = array();
-					if(!$reuse)
-					{
-						if($this->genCF < $this->currentRecord)
-						{
-							
-							$this->currentRecord = $this->genCF;	
-							$this->currentRecordRoute = $this->genRoute;
-							$this->setNumRecord();
-						}
-					}else
-					{
-						if($this->genCF < $this->secondCost)
-						{
-							$this->secondCost = $this->genCF;	
-							$this->secondRoute = $this->genRoute;
-							$this->setNumRecord();
-						}
-					}
-
-					$ant->updatePheromone(0, $ant->route);
+					$this->getMeanCF($ant->CF);
+					array_push($this->CFlist, $ant->CF);
+				
 					
-					if ($this->numRecord == 0) 
-					{							
-						if(!$reuse)
-						{
-							$this->startList = array();
-							$this->setNumRecord();
-							$this->genCF =9999;
-							$this->temp = 0;
-							$this->findRoute(true);
-						}
+					if($ant->CF < $this->genCF)
+					{
 						
-						break;
+						$ant->countAnts($ant->route);	
+						
+						$this->genCF = $ant->CF;
+						
+						$this->genRoute = $ant->route;
+						
+						$ant->updatePheromone(1, $ant->route);							
+						
+						
+						//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
+					}elseif($this->meanCF <= $ant->CF )
+					{
+						$ant->updatePheromone(2, $ant->route);
 					}
-					$this->numRecord--;
-					$this->genCF = 9999;
-					$this->startList = array();
-					$this->generation--;
 				}
+			}
+
+			$this->CFlist = array();
+			if(!$reuse)
+			{
+				$this->updateRecord($this->genCF, $this->genRoute, 
+				$this->currentRecord, $this->currentRecordRoute);
+			}else
+			{
+				$this->updateRecord($this->genCF, $this->genRoute, 
+				$this->secondCost, $this->secondRoute);
+			}
+
+			$ant->updatePheromone(0, $ant->route);
+			
+			if ($this->numRecord == 0) 
+			{							
+				if(!$reuse)
+				{
+					$this->startList = array();
+					$this->setNumRecord();
+					$this->genCF =9999;
+					$this->temp = 0;
+					$this->findRoute(true);
+				}
+				
+				break;
+			}
+			$this->numRecord--;
+			$this->genCF = 9999;
+			$this->startList = array();
+			$this->generation--;
+		}
 	}
 
-
+	private function updateRecord($currentCF, $currentRoute , &$recordCF, &$recordRoute)
+	{
+		if($currentCF < $recordCF){
+			$recordCF = $currentCF;	
+			$recordRoute = $currentRoute;
+			$this->setNumRecord();
+		}
+	}
+	
+	
 	
 	private function blocker($route)
 	{
