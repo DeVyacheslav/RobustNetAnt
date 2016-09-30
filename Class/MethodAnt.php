@@ -193,19 +193,13 @@ class MethodAnt implements IMethod {
 					$this->getMeanCF($ant->CF);
 					array_push($this->CFlist, $ant->CF);
 				
-					
-					if($ant->CF < $this->genCF)
+					if($this->updateRecord($ant->CF, $ant->route, 
+					$this->genCF, $this->genRoute))
 					{
-						
 						$ant->countAnts($ant->route);	
-						
-						$this->genCF = $ant->CF;
-						
-						$this->genRoute = $ant->route;
-						
+
 						$ant->updatePheromone(1, $ant->route);							
-						
-						
+
 						//$TwoOpt = new TwoOpt($this->task, $this->genRoute,$this->genCF);
 					}elseif($this->meanCF <= $ant->CF )
 					{
@@ -217,12 +211,14 @@ class MethodAnt implements IMethod {
 			$this->CFlist = array();
 			if(!$reuse)
 			{
-				$this->updateRecord($this->genCF, $this->genRoute, 
-				$this->record, $this->recordRoute);
+				if($this->updateRecord($this->genCF, $this->genRoute, $this->record, $this->recordRoute)){
+					$this->setNumRecord();
+				}
 			}else
 			{
-				$this->updateRecord($this->genCF, $this->genRoute, 
-				$this->record2, $this->recordRoute2);
+				if($this->updateRecord($this->genCF, $this->genRoute, $this->record2, $this->recordRoute2)){
+					$this->setNumRecord();
+				}
 			}
 
 			$ant->updatePheromone(0, $ant->route);
@@ -252,8 +248,10 @@ class MethodAnt implements IMethod {
 		if($currentCF < $recordCF){
 			$recordCF = $currentCF;	
 			$recordRoute = $currentRoute;
-			$this->setNumRecord();
+			
+			return true;
 		}
+		return false;
 	}
 	
 	
