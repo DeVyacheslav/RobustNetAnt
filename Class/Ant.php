@@ -14,16 +14,16 @@ class Ant{
 	public $antMatrix = array();//зберігається кількість мурах, що пройшли по ребрам
 	public $route;	//шлях мурахи
 	public $tabuList; //вершини в яких вже була мураха
-	public $currentRecordRoute = array();//поточний рекорд
+	public $recordRoute = array();//поточний рекорд
 	 
-	 public function __construct($task,/*$start,*/&$pheromone, &$antMatrix, $currentRecordRoute, $alpha, $beta, $decay){
+	 public function __construct($task,/*$start,*/&$pheromone, &$antMatrix, $recordRoute, $alpha, $beta, $decay){
 		$this->alpha = $alpha; //1.1
 		$this->beta = $beta;	//3
 		$this->Pg = $decay;//0.9
 		$this->Mu = 0.1;//0.5
 		$this->route = array();
 		$this->tabuList = array();
-		$this->currentRecordRoute = $currentRecordRoute;
+		$this->recordRoute = $recordRoute;
 		$this->antMatrix = &$antMatrix;
 		
 		//мураха має задачу

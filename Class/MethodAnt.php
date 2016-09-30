@@ -6,8 +6,8 @@
 class MethodAnt implements IMethod {
 	private $genCF = 9999;
 	private $genRoute = array();
-	private $currentRecord = 9999;
-	private $currentRecordRoute = array();
+	private $record = 9999;
+	private $recordRoute = array();
 	private $numRecord = 20;
 	private $pheromone;
 	private $start;
@@ -62,7 +62,7 @@ class MethodAnt implements IMethod {
 		$exec_time = $time_post - $time_pre;
 
 		/*$time_pre = microtime(true);
-		$TwoOpt = new TwoOpt($this->task, $this->currentRecordRoute, $this->currentRecord);
+		$TwoOpt = new TwoOpt($this->task, $this->recordRoute, $this->record);
 		$TwoOpt = new TwoOpt($this->task, $this->secondRoute, $this->secondCost);
 		$time_post = microtime(true);*/
 		
@@ -93,14 +93,14 @@ class MethodAnt implements IMethod {
 	{
 
 		$count = count($this->secondRoute)-1;
-		$count2 = count($this->currentRecordRoute)-1;
+		$count2 = count($this->recordRoute)-1;
 		for ($i=0; $i < $count; $i++) {
 			for ($j=0; $j < $count2; $j++) {
 				$from = $this->secondRoute[$i];
 				$to = $this->secondRoute[$i+1];
 				
-				if($this->currentRecordRoute[$j] == $from 
-				&& $this->currentRecordRoute[$j+1] == $to)
+				if($this->recordRoute[$j] == $from 
+				&& $this->recordRoute[$j+1] == $to)
 					{
 
 							$cost-=$this->task->Matrix[$from][$to];
@@ -116,7 +116,7 @@ class MethodAnt implements IMethod {
 
 	public function getCost()
 	{
-		$cost = $this->currentRecord +$this->secondCost;
+		$cost = $this->record +$this->secondCost;
 
 		$cost = $this->costCalculator($cost, false);
 		
@@ -181,7 +181,7 @@ class MethodAnt implements IMethod {
 				$this->task,
 				$this->pheromone,
 				$this->antMatrix, 
-				$this->currentRecordRoute, 
+				$this->recordRoute, 
 				$this->alpha,
 				$this->beta, 
 				$this->Pg);	
@@ -218,7 +218,7 @@ class MethodAnt implements IMethod {
 			if(!$reuse)
 			{
 				$this->updateRecord($this->genCF, $this->genRoute, 
-				$this->currentRecord, $this->currentRecordRoute);
+				$this->record, $this->recordRoute);
 			}else
 			{
 				$this->updateRecord($this->genCF, $this->genRoute, 
@@ -281,13 +281,13 @@ class MethodAnt implements IMethod {
 	{
 		$this->generation = $_POST['numCol'];
 	
-		$this->blocker($this->currentRecordRoute);
+		$this->blocker($this->recordRoute);
 		
-		$tempRoute = array_reverse($this->currentRecordRoute);
+		$tempRoute = array_reverse($this->recordRoute);
 		
 		$this->blocker($tempRoute);
 			
-		$this->task->tabuArray =  array(end($this->currentRecordRoute), $this->currentRecordRoute[0]);
+		$this->task->tabuArray =  array(end($this->recordRoute), $this->recordRoute[0]);
 			
 	}
 	

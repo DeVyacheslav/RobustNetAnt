@@ -25,8 +25,8 @@ class ViewAnt {
 	//	echo "Alpha: ",$this->method->alpha," Beta: ",$this->method->beta,"<br>";
 		echo	'<table style="width:100%">';
 		echo "<tr>";
-		echo "<td width = '40%'>Route 1 Cost(".$this->method->currentRecord."): ";	
-		$this->controller->getRoute($this->method->currentRecordRoute,$this->task);
+		echo "<td width = '40%'>Route 1 Cost(".$this->method->record."): ";	
+		$this->controller->getRoute($this->method->recordRoute,$this->task);
 		echo "</td>";	
 		echo "<td width = '30%'>Route 2 Cost(".$this->method->secondCost."): ";
 		$this->controller->getRoute($this->method->secondRoute,$this->task);
@@ -40,14 +40,14 @@ class ViewAnt {
 	public function outputVisualization($task_matrix)
 	{
 		$temp = $this->method->secondRoute;
-		if($temp[0] == $this->method->currentRecordRoute[0]){
+		if($temp[0] == $this->method->recordRoute[0]){
 			$temp = array_reverse($temp);
 		}
 
 		array_shift($temp);
 		array_pop($temp);
 
-		$bestRoute = array_merge($this->method->currentRecordRoute, $temp);	
+		$bestRoute = array_merge($this->method->recordRoute, $temp);	
 
 		$visualization = new Visualization($bestRoute, $this->task, $task_matrix);
 		
