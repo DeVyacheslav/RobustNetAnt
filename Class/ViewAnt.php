@@ -29,7 +29,7 @@ class ViewAnt {
 		$this->controller->getRoute($this->method->recordRoute,$this->task);
 		echo "</td>";	
 		echo "<td width = '30%'>Route 2 Cost(".$this->method->record2."): ";
-		$this->controller->getRoute($this->method->secondRoute,$this->task);
+		$this->controller->getRoute($this->method->recordRoute2,$this->task);
 		echo "</td>";		
 		echo "<td width = '20%'>Timer (total): ".$this->method->timer."</td>";
 		echo "<td width = '10%'>Networks cost: ".$this->method->getCost()."</td>";
@@ -39,7 +39,7 @@ class ViewAnt {
 	
 	public function outputVisualization($task_matrix)
 	{
-		$temp = $this->method->secondRoute;
+		$temp = $this->method->recordRoute2;
 		if($temp[0] == $this->method->recordRoute[0]){
 			$temp = array_reverse($temp);
 		}

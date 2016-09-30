@@ -13,7 +13,7 @@ class MethodAnt implements IMethod {
 	private $start;
 	private $bigTask = false;
 	private $firstRoute = array();
-	private $secondRoute = array();
+	private $recordRoute2 = array();
 	private $firstCost = 9999;
 	private $record2 = 9999;
 	private $antNum;
@@ -63,7 +63,7 @@ class MethodAnt implements IMethod {
 
 		/*$time_pre = microtime(true);
 		$TwoOpt = new TwoOpt($this->task, $this->recordRoute, $this->record);
-		$TwoOpt = new TwoOpt($this->task, $this->secondRoute, $this->record2);
+		$TwoOpt = new TwoOpt($this->task, $this->recordRoute2, $this->record2);
 		$time_post = microtime(true);*/
 		
 		$TwoOpt_time = 0/*$time_post - $time_pre*/;
@@ -92,12 +92,12 @@ class MethodAnt implements IMethod {
 	public function costCalculator($cost, $flag)
 	{
 
-		$count = count($this->secondRoute)-1;
+		$count = count($this->recordRoute2)-1;
 		$count2 = count($this->recordRoute)-1;
 		for ($i=0; $i < $count; $i++) {
 			for ($j=0; $j < $count2; $j++) {
-				$from = $this->secondRoute[$i];
-				$to = $this->secondRoute[$i+1];
+				$from = $this->recordRoute2[$i];
+				$to = $this->recordRoute2[$i+1];
 				
 				if($this->recordRoute[$j] == $from 
 				&& $this->recordRoute[$j+1] == $to)
@@ -120,7 +120,7 @@ class MethodAnt implements IMethod {
 
 		$cost = $this->costCalculator($cost, false);
 		
-		$this->secondRoute=array_reverse($this->secondRoute);
+		$this->recordRoute2=array_reverse($this->recordRoute2);
 		
 		$cost = $this->costCalculator($cost, true);
 
@@ -222,7 +222,7 @@ class MethodAnt implements IMethod {
 			}else
 			{
 				$this->updateRecord($this->genCF, $this->genRoute, 
-				$this->record2, $this->secondRoute);
+				$this->record2, $this->recordRoute2);
 			}
 
 			$ant->updatePheromone(0, $ant->route);
