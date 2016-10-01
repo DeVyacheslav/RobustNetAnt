@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('[class~=panel-heading]').css('text-align', 'center').css('font-weight','bold');
 	
-	$('[class~=panel-body], [class|=task-solver], [class~=solve], div[id|=real] div[id|=real]')
+	$('[class~=panel-body], [class~=task-solver], [class~=solve], div[id|=real] div[id|=real]')
 	.css('display','none');
 
 	
@@ -18,16 +18,16 @@ $(document).ready(function(){
 	});
 	
 	$('#task-file').click(function(){
-		$('[class~=task-solver], .task-file-solver').fadeIn();		
-		$('.task-random-solver').fadeOut();
+		$('[class~=task-solver], .task-file-solver').show();		
+		$('.task-random-solver').hide();
 		$(this).toggleClass("active");
 		$('[name=customtask]').val("ct");
 		$('[name=Terminal], [name=amountV]').val("");
 	});
 	
 	$('#task-random').click(function(){
-		$('[class~=task-solver], .task-random-solver').fadeIn();
-		$('.task-file-solver').fadeOut();
+		$('[class~=task-solver], .task-random-solver').show();
+		$('.task-file-solver').hide();
 		$(this).toggleClass( "active");
 		$('[name=customtask]').val("ft");
 	});
