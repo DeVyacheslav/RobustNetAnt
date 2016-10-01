@@ -23,3 +23,19 @@ th, td {
     text-indent: 20px;
     font-size: 130%
 }
+
+.rect{
+	border: black solid;
+	width: 60px;
+	height: 30px;
+	text-align: center
+}
+
+.circle{
+	border: black solid;
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 5px
+}
