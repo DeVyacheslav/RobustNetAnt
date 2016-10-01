@@ -13,6 +13,10 @@ $(document).ready(function(){
 		$('#solver-info').fadeToggle();
 	});
 	
+	$('#real-task-info-btn').click(function(){
+		$('#real-task-info').fadeToggle();
+	});
+	
 	$('#task-file').click(function(){
 		$('[class~=task-solver], .task-file-solver').fadeIn();		
 		$('.task-random-solver').fadeOut();
