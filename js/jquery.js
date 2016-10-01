@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('[class~=panel-heading]').css('text-align', 'center').css('font-weight','bold');
 	
-	$('[class~=panel-body], [class~=task-solver], [class~=solve]')
+	$('[class~=panel-body], [class~=task-solver], [class~=solve], [id|=real-common]')
 	.css('display','none');
 
 	
@@ -33,13 +33,13 @@ $(document).ready(function(){
 	});
 	
 	$('#real-task-2-btn').click(function(){
-		$('div[id|=real] div[id|=real-task-2]').show();
+		$('div[id|=real] div[id|=real-task-2], [id|=real-common]').show();
 		$('div[id|=real] div[id|=real-task-3]').hide();
 		$(this).toggleClass( "active");
 	});
 	
 	$('#real-task-3-btn').click(function(){
-		$('div[id|=real] div[id|=real-task-3]').show();
+		$('div[id|=real] div[id|=real-task-3], [id|=real-common]').show();
 		$('div[id|=real] div[id|=real-task-2]').hide();
 		$(this).toggleClass( "active");
 	});
