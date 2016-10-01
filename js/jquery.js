@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('[class~=panel-heading]').css('text-align', 'center').css('font-weight','bold');
 	
-	$('[class~=panel-body], [class~=task-solver], [class~=solve], div[id|=real] div[id|=real]')
+	$('[class~=panel-body], [class~=task-solver], [class~=solve]')
 	.css('display','none');
 
 	
