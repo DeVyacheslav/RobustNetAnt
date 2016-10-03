@@ -39,3 +39,12 @@ th, td {
 	text-align: center;
 	padding: 5px
 }
+
+.panel-body{
+	display:none
+}
+
+.panel-heading{
+	text-align: center;
+	font-weight: bold
+}
