@@ -176,7 +176,6 @@ class Ant{
 				 }
 			 }
 		 }
-		 
 	 }
 	
 	 
@@ -201,24 +200,14 @@ class Ant{
 					
 					//імовірнісне правило	
 					$temp2 = (float)$temp /(float)$temp1;
-					
-					//знаходження попереднього значення імовірності, обходимо недоступні вершини					
-					while(current($this->pkm) == TaskGenerator::$BigNum)
-					{
-						//рух по масиву з права на ліво
-						prev($this->pkm);
-					} 				
+						
 					//Створюємо імовірнісний масив для вибору шляху
-					array_push($this->pkm,floatval($temp2)+current($this->pkm)); 
+					$this->pkm[$i]=floatval($temp2)+current($this->pkm); 
 					
 					//після маніпуляцій над масивом повертаємо вказівник в кінець масиву 		
 					end($this->pkm);		 
 					
-				}else
-			 	{
-			 		 //не існує шляху - не можливо обрати
-			 		 array_push($this->pkm, TaskGenerator::$BigNum); 				
-			 	}
+				}
 				++$i;
 			 }
 		 
