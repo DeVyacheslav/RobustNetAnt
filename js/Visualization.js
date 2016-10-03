@@ -32,13 +32,13 @@ d3.json("miserables.json", function(error, graph) {
         .data(graph.links)
         .enter()
         .append('path')
-        .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
+        .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;},
                'class':'edgepath',
                'fill-opacity':0,
                'stroke-opacity':0,
                'fill':'blue',
                'stroke':'red',
-               'id':function(d,i) {return 'edgepath'+i}})
+               'id':function(d,i) {return 'edgepath'+i;}})
         .style("pointer-events", "none");
  
  	var edgelabels = svg.selectAll(".edgelabel")
@@ -47,14 +47,14 @@ d3.json("miserables.json", function(error, graph) {
         .append('text')
         .style("pointer-events", "none")
         .attr({'class':'edgelabel',
-               'id':function(d,i){return 'edgelabel'+i},
+               'id':function(d,i){return 'edgelabel'+i;},
                'dx':80,
                'dy':20,
                'font-size':16,
                'fill':'#aaa'});
 
     edgelabels.append('textPath')
-        .attr('xlink:href',function(d,i) {return '#edgepath'+i})
+        .attr('xlink:href',function(d,i) {return '#edgepath'+i;})
         .style("pointer-events", "none")
         .text(function(d,i){return d.value;});
  	
@@ -90,7 +90,7 @@ d3.json("miserables.json", function(error, graph) {
 		 
 		  edgepaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
                                            //console.log(d)
-                                           return path});       
+                                           return path;});       
 
         edgelabels.attr('transform',function(d,i){
             if (d.target.x<d.source.x){
