@@ -43,7 +43,7 @@ class Ant{
 
 	}
 	 
-	public function startPoint()
+	private function startPoint()
 	{			
 		
 		$start = mt_rand(0, count($this->task->tabuArray)-1);
@@ -54,7 +54,7 @@ class Ant{
 	}
 	 
 	 
-	public function sumAnt($start, $move)
+	private function sumAnt($start, $move)
 	{
 			return $this->antMatrix[$start][$move];
 	}
@@ -93,7 +93,7 @@ class Ant{
 	
 	
 	
-	public function globalUpdate($start, $move)
+	private function globalUpdate($start, $move)
 	{
 			if($this->pheromone[$start][$move] > 0.001 
 			&& !in_array($start, $this->task->tabuArray)
@@ -107,7 +107,7 @@ class Ant{
 	}
 	
 	
-	public function addPheromone($start, $move)
+	private function addPheromone($start, $move)
 	{
 			if(!in_array($start, $this->task->tabuArray) 
 			&& !in_array($move, $this->task->tabuArray))
@@ -119,7 +119,7 @@ class Ant{
 	}
 	
 	
-	public function reducePheromone($start, $move)
+	private function reducePheromone($start, $move)
 	{
 		 	if($this->pheromone[$start][$move] > 0.001 
 		 	&& !in_array($start, $this->task->tabuArray) 
@@ -158,7 +158,7 @@ class Ant{
 	
 
 
-	public function moveAnt()
+	private function moveAnt()
 	 {
 			//створюємо значення рулетки
 		 $move = (float)rand()/(float)getrandmax();
@@ -179,7 +179,7 @@ class Ant{
 	 }
 	
 	 
-	 public function selectEdge() 
+	 private function selectEdge() 
 	 {
 	 
 	 $this->pkm = array();
@@ -214,7 +214,7 @@ class Ant{
 	 }
 
 //сумуємо доступні ребра
-		public function sumEdges()
+		private function sumEdges()
 		{
 			for ($i=0; $i < $this->task->amountV; $i++) { 
 					//вершина не може бути забороненою, та не в табу списку
@@ -230,7 +230,7 @@ class Ant{
 		}
 
 
-		public function maxRule()
+		private function maxRule()
 		{
 			$max = 0;
 			for ($i=0; $i < $this->task->amountV; $i++) {
