@@ -242,10 +242,12 @@ class Ant{
 							if($temp > $max)
 							{
 									$max = $temp;
-									$this->move = $i;
+									$move = $i;
 							}
 						}
-			} 			
+			}
+			
+			return $move; 			
 		}
 		
 		
@@ -257,7 +259,7 @@ class Ant{
 				$this->moveAnt();
 			}else
 			{
-				$this->maxRule();
+				$this->move = $this->maxRule();
 			}
 		}
 }
