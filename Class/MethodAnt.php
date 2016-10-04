@@ -126,36 +126,6 @@ class MethodAnt implements IMethod {
 
 		return $cost;
 	}
-
-
-	
-	
-	
-	/*
-	 * Мурашиний алгоритм
-	 */ 
-	/*public function antAlgorithm(&$ant)
-	{
-		while(array_diff($this->task->tabuArray, $ant->route))
-		{
-			$r = (float)mt_rand()/(float)mt_getrandmax();
-			
-			$ant->selectionRule($r, $this->q);
-
-			$ant->addAntRoute();
-			
-			if($ant->start == $ant->move)
-			{
-				$ant->CF = NULL;
-				$ant->updatePheromone(2, $ant->route);
-				break;	
-			}			
-						
-			$ant->addToCF();
-			
-			$ant->setNextMove();
-		}
-	}*/
 	
 	
 	
