@@ -171,8 +171,8 @@ class Ant{
 					//якщо потрапив в діапазон - роби крок
 				 if((float)$move <= (float)$value)
 				 {
-				 	$this->move = $key;
-				 break;
+				 	$move = $key;
+				 	return $move;
 				 }
 			 }
 		 }
@@ -256,7 +256,7 @@ class Ant{
 			if($r < $q)
 			{
 				$this->selectEdge();	
-				$this->moveAnt();
+				$this->move = $this->moveAnt();
 			}else
 			{
 				$this->move = $this->maxRule();
