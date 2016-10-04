@@ -134,7 +134,7 @@ class MethodAnt implements IMethod {
 	/*
 	 * Мурашиний алгоритм
 	 */ 
-	public function antAlgorithm(&$ant)
+	/*public function antAlgorithm(&$ant)
 	{
 		while(array_diff($this->task->tabuArray, $ant->route))
 		{
@@ -155,7 +155,7 @@ class MethodAnt implements IMethod {
 			
 			$ant->setNextMove();
 		}
-	}
+	}*/
 	
 	
 	
@@ -186,7 +186,7 @@ class MethodAnt implements IMethod {
 				$this->beta, 
 				$this->Pg);	
 
-				$this->antAlgorithm($ant);	
+				$ant->antAlgorithm($this->q);	
 				
 				if(!is_null($ant->CF))
 				{

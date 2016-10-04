@@ -42,6 +42,30 @@ class Ant{
 		array_push($this->tabuList, $this->start);		
 
 	}
+	
+	public function antAlgorithm($q)
+	{
+		while(array_diff($this->task->tabuArray, $this->route))
+		{
+			$r = (float)mt_rand()/(float)mt_getrandmax();
+			
+			$this->selectionRule($r, $q);
+
+			$this->addAntRoute();
+			
+			if($this->start == $this->move)
+			{
+				$this->CF = NULL;
+				$this->updatePheromone(2, $this->route);
+				break;	
+			}			
+						
+			$this->addToCF();
+			
+			$this->setNextMove();
+		}
+	}
+	
 	 
 	private function startPoint()
 	{			
@@ -59,7 +83,7 @@ class Ant{
 			return $this->antMatrix[$start][$move];
 	}
 	
-	public function addAntRoute()
+	private function addAntRoute()
 	{
 		//вносимо обрану вершину до маршруту
 		array_push($this->route,$this->move);
@@ -79,13 +103,13 @@ class Ant{
 		}
 	}
 	
-	public function addToCF()
+	private function addToCF()
 	{
 		//рахуємо цільову функцію
 		$this->CF += $this->task->Matrix[$this->start][$this->move];
 	}
 	
-	public function setNextMove()
+	private function setNextMove()
 	{
 		//обрана вершина стає початком для наступного кроку мурахи		
 		$this->start = $this->move;
@@ -251,7 +275,7 @@ class Ant{
 		}
 		
 		
-		public function selectionRule($r, $q)
+		private function selectionRule($r, $q)
 		{
 			if($r < $q)
 			{
