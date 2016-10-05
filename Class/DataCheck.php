@@ -29,9 +29,9 @@ class DataCheck implements ICheck {
 			{
 				$this->isNumeric($value);
 				$this->inRange($value, $from, $to);	
+				return false;
 			}catch(Exception $e){
-					echo 'Caught exception: ',  $e->getMessage(), "\n";
-					die();
+					return  $e->getMessage();
 			}
 				
 		}
