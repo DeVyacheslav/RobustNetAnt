@@ -2,7 +2,7 @@
 include "index.html";
 
 	spl_autoload_register(function ($class) {
-	    include 'Class/' . $class . '.php';
+	    include_once 'Class/' . $class . '.php';
 	});
 	
 	inputValidation(new DataCheck);
@@ -34,8 +34,8 @@ function inputValidation(ICheck $checker)
 	$errors['alpha'] = $checker->checkField($_POST['alpha'], 0, 10);
 	$errors['beta'] = $checker->checkField($_POST['beta'], 0, 10);
 	$errors['decay'] = $checker->checkField($_POST['decay'], 0, 10);
-	$errors['run'] = $checker->checkField($_POST['run'], 0, 100);
-	$errors['numCol'] = $checker->checkField($_POST['numCol'], 10, 10000);
+	$errors['run'] = $checker->checkField($_POST['run'], 0, 10);
+	$errors['numCol'] = $checker->checkField($_POST['numCol'], 10, 1000);
 	
 	foreach($errors as $k => $error){
 		if($error !== false){

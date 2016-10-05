@@ -16,7 +16,7 @@ class DataCheck implements ICheck {
 	
 	public function inRange($value, $from, $to)
 	{
-		if($from >= $value || $value >= $to)
+		if($from > $value || $value > $to)
 			throw new RangeException("Error data isn't in range from $from to $to");
 		
 	}
