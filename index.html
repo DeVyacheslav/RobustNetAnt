@@ -110,7 +110,7 @@
 							Ant algorithm
 						</div>
 						<div class="panel panel-body task-solver">
-							<form method="post" action="Main.php">
+							<form id="form-ant" method="post" action="Main.php">
 								<input type="hidden" name="method" value="ant">
 								<input type="hidden" name="customtask" value="ct">
 
@@ -168,7 +168,7 @@
 										<span id="error-numCol"></span>
 										<span id="error-numCol-icon"></span>
 									</div>
-									<Br>
+
 
 									<div class="task-file-solver">
 										<label for="task">Select a task: </label>
@@ -186,7 +186,7 @@
 										</select>
 									</div>
 								</div>
-								<input type='submit' class="btn btn-primary btn-block"  value="Get solve">
+								<input type='submit' class="btn btn-primary btn-block submit"  value="Get solve">
 							</form>
 						</div>
 
@@ -196,7 +196,7 @@
 							Dijkstra's algorithm
 						</div>
 						<div  class="panel panel-body task-solver">
-							<form method="post" action="Main.php">
+							<form id="form-d" method="post" action="Main.php">
 								<input type="hidden" name="customtask" value="ct">
 								<input type="hidden" name="method" value="d">
 								<legend id="tipcolor">
@@ -204,11 +204,19 @@
 								</legend>
 								<div class="form-group">
 									<div class="task-random-solver">
-										<label for="Terminal_r"> Enter amount of terminal vertexes:</label>
-										<input class="form-control" id="Terminal_r" name="Terminal" title="Enter amount of terminal vertexes:" min="2" value="5" onkeyup="showError(this.value)">
+										<div class="form-group">
+											<label for="Terminalr"> Enter amount of terminal vertexes:</label>
+											<input class="form-control" id="Terminalr" name="Terminalr" title="Enter amount of terminal vertexes:" min="2" value="5" onkeyup="showError(this.value, this.name)">
+											<span id="error-Terminalr"></span>
+											<span id="error-Terminalr-icon"></span>
+										</div>
 
-										<label for="amountV_r"> Enter overall amount of vertexes:</label>
-										<input class="form-control" id="amountV_r" name="amountV" title="Enter overall amount of vertexes:" min="3" value="17" onkeyup="showError(this.value)">
+										<div class="form-group">
+											<label for="amountVr"> Enter overall amount of vertexes:</label>
+											<input class="form-control" id="amountVr" name="amountVr" title="Enter overall amount of vertexes:" min="3" value="17" onkeyup="showError(this.value, this.name)">
+											<span id="error-amountVr"></span>
+											<span id="error-amountVr-icon"></span>
+										</div>
 
 									</div>
 									<div class="task-file-solver">

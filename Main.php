@@ -28,14 +28,22 @@ function inputValidation(ICheck $checker)
 	$errors =[];
 	if($_POST['customtask']!='ct')
 	{
+		if($_POST['method']=='ant'){
 		$errors['amountV'] = $checker->checkField($_POST['amountV'], 3, 1000);	
-		$errors['Terminal'] = $checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);	
-	}		
-	$errors['alpha'] = $checker->checkField($_POST['alpha'], 0, 10);
-	$errors['beta'] = $checker->checkField($_POST['beta'], 0, 10);
-	$errors['decay'] = $checker->checkField($_POST['decay'], 0, 10);
-	$errors['run'] = $checker->checkField($_POST['run'], 0, 10);
-	$errors['numCol'] = $checker->checkField($_POST['numCol'], 10, 1000);
+		$errors['Terminal'] = $checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);
+		}
+		else{
+		$errors['amountVr'] = $checker->checkField($_POST['amountVr'], 3, 1000);	
+		$errors['Terminalr'] = $checker->checkField($_POST['Terminalr'], 2, $_POST['amountVr']);
+		}	
+	}
+	if($_POST['method']=='ant'){		
+		$errors['alpha'] = $checker->checkField($_POST['alpha'], 0, 10);
+		$errors['beta'] = $checker->checkField($_POST['beta'], 0, 10);
+		$errors['decay'] = $checker->checkField($_POST['decay'], 0, 10);
+		$errors['run'] = $checker->checkField($_POST['run'], 0, 10);
+		$errors['numCol'] = $checker->checkField($_POST['numCol'], 10, 1000);
+	}
 	
 	foreach($errors as $k => $error){
 		if($error !== false){

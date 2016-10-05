@@ -11,7 +11,7 @@ if($q !=="")
 		$error = $checker->checkField($q, 0, 10);
 	if(in_array($input, ['numCol']))
 		$error = $checker->checkField($q, 10, 1000);
-	if(in_array($input, ['amountV','Terminal']))
+	if(in_array($input, ['amountV','amountVr','Terminal','Terminalr']))
 		$error = $checker->checkField($q, 3, 1000);
 	if($error !== false){
 		echo "$input: $error";

@@ -10,6 +10,7 @@ class RandomSolver extends ASolver {
 		{
 			$this->antRand($generator);
 		}elseif($_POST['method']=='d'){
+			$task = $generator->genFullTask($_POST['Terminalr'],$_POST['amountVr']);
 			$this->dijkstra($task);
 		}
 	}
