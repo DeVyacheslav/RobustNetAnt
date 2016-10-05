@@ -32,7 +32,7 @@ function inputValidation(ICheck $checker)
 		$errors['amountV'] = $checker->checkField($_POST['amountV'], 3, 1000);	
 		$errors['Terminal'] = $checker->checkField($_POST['Terminal'], 2, $_POST['amountV']);
 		}
-		else{
+		elseif($_POST['method']=='d') {
 		$errors['amountVr'] = $checker->checkField($_POST['amountVr'], 3, 1000);	
 		$errors['Terminalr'] = $checker->checkField($_POST['Terminalr'], 2, $_POST['amountVr']);
 		}	

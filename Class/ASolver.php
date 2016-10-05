@@ -10,9 +10,25 @@ abstract class ASolver {
 	final public function antAlgorithm(ATask $task)
 	{
 		$best=9999;
-		
-		for($i=0; $i < $_POST['run']; $i++)
+		$run = $_POST['run'];
+		for($i=0; $i < $run; $i++)
 			{
+				 // Calculate the percentation
+			    $percent = intval($i/$run * 100)."%";
+			    
+			    // Javascript for updating the progress bar and information
+			    echo '<script language="javascript">
+			    document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
+			    document.getElementById("information").innerHTML="'.$i.' task(s) processed.";
+			    </script>';
+			
+			    
+			// This is for the buffer achieve the minimum size in order to flush data
+			    echo str_repeat(' ',1024*64);
+			
+			    
+			// Send output to browser immediately
+			    flush(); 
 				$task->BuildTask();
 				
 				$task_matrix = $task->Matrix;
@@ -39,6 +55,8 @@ abstract class ASolver {
 			}
 			$view->outputTask();
 			$view->outputVisualization($task_matrix);
+			// Tell user that the process is completed
+			echo '<script language="javascript">document.getElementById("information").innerHTML="Process completed"</script>';
 	}
 	
 	final public function dijkstra(ATask $task)

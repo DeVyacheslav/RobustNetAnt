@@ -48,3 +48,11 @@ th, td {
 	text-align: center;
 	font-weight: bold
 }
+
+#progress{
+	max-width;
+	border:1px solid #ccc;
+}
+#information{
+	width;
+}
