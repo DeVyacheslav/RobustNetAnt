@@ -25,13 +25,13 @@ class ViewAnt {
 	//	echo "Alpha: ",$this->method->alpha," Beta: ",$this->method->beta,"<br>";
 		echo	'<table style="width:100%">';
 		echo "<tr>";
-		echo "<td width = '40%'>Route 1 Cost(".$this->method->record."): ";	
+		echo "<td width = '45%'>Route 1 Cost(".$this->method->record."): ";	
 		$this->controller->getRoute($this->method->recordRoute,$this->task);
 		echo "</td>";	
-		echo "<td width = '30%'>Route 2 Cost(".$this->method->record2."): ";
+		echo "<td width = '35%'>Route 2 Cost(".$this->method->record2."): ";
 		$this->controller->getRoute($this->method->recordRoute2,$this->task);
 		echo "</td>";		
-		echo "<td width = '20%'>Timer (total): ".$this->method->timer."</td>";
+		echo "<td width = '10%'>Timer (total): ".number_format($this->method->timer,2)."</td>";
 		echo "<td width = '10%'>Networks cost: ".$this->method->getCost()."</td>";
 		echo "</tr>";
 		echo "</table>";
